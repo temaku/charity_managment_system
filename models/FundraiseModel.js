@@ -1,0 +1,25 @@
+const mongoose = require('mongoose');
+
+const FundraiseSchema = new mongoose.Schema({
+    title:{
+        type:String,
+        required:[true,'Please provide the title to Funraise']
+    },
+    description:{
+        type:String,
+        required:[true,'Please provide the description']
+    },
+    Amount:{
+        type:Number,
+        default:0
+        },
+},
+       
+{
+    timestamps:true
+}
+
+)
+
+const Fundraise = mongoose.model('Fundraise',FundraiseSchema);
+module.exports = Fundraise;
