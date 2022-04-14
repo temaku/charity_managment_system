@@ -16,6 +16,7 @@ const eventsRoute =require('./Routes/eventsRoute');
 const taskRoute = require('./Routes/tastRoute');
 const reportRoute = require('./Routes/reportRoute');
 const registerEvent = require('./Routes/eventRegisterRoute');
+const adminRoute = require('./Routes/adminRoute');
 const errorHandler = require('./middleware/errhandler');
 app.use(morgan('dev'));
 app.use(express.json())
@@ -32,6 +33,7 @@ app.use(cors());
 app.options('*', cors());
 
 app.use('/api/v1/auth',authRoutes);
+app.use('/api/v1/admin',adminRoute);
 app.use('/api/v1/categories',categoryRoutes);
 app.use('/api/v1/charities',charityRoute);
 app.use('/api/v1/donations',donationRoute);
