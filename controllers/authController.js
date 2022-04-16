@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const sendEmail = require('../middleware/email');
 
-
 exports.signup = catchAsync(async (req,res)=>{
     const user = await User.create({
         username:req.body.username,
@@ -35,16 +34,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Incorrect email or password', 401));
   }
   const token = jwt.sign({id:user.id},process.env.JWT_SECRET,{  expiresIn: process.env.JWT_EXPIRES_IN});
-  const cookieOptions = {
-      expires: new Date(
-        Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-      ),
-      httpOnly: true
-    };
-    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
   
-    res.cookie('jwt', token, cookieOptions);
-    // Remove password from output
     user.password = undefined;
     res.status(200).json({
       status: 'success',
@@ -73,7 +63,6 @@ exports.login = catchAsync(async (req, res, next) => {
   
     // 2) Generate the random reset token
     const resetToken = user.createPasswordResetToken();
-    console.log(resetToken);
     await user.save({ validateBeforeSave: false });
   
     // 3) Send it to user's email
@@ -168,16 +157,6 @@ exports.login = catchAsync(async (req, res, next) => {
   
     // 4) Log user in, send JWT
     const token = jwt.sign({userId:user.id},process.env.JWT_SECRET,{  expiresIn: process.env.JWT_EXPIRES_IN});
-    const cookieOptions = {
-        expires: new Date(
-          Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-        ),
-        httpOnly: true
-      };
-      if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-    
-      res.cookie('jwt', token, cookieOptions);
-      // Remove password from output
       user.password = undefined;
       res.status(200).json({
         status: 'success',

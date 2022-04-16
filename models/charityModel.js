@@ -15,7 +15,7 @@ const charitySchema = new mongoose.Schema({
         ref:'Category',
         required:true
     },
-    Image:{
+    image:{
         type:String,
         default:"default.png"
     },
@@ -30,8 +30,8 @@ const charitySchema = new mongoose.Schema({
         type:String,
         default:"adrress"
     },
-    Phone:{
-        type:Number,
+    phone:{
+        type:String,
         default:"phone"
     },
     NumOfDonors:{

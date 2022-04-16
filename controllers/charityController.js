@@ -77,7 +77,7 @@ exports.getAllCharity = catchAsync(async (req,res,next)=>{
   })
 exports.updateCharity =catchAsync(async (req,res,next)=>{
   const filteredBody = filterObj(req.body,'email')
-  console.log(filteredBody);
+ 
   if(req.file){
     filteredBody.Image = req.file.filename;
   }

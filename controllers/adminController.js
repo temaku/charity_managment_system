@@ -4,9 +4,49 @@ const AppError = require('../middleware/appError');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const sendEmail = require('../middleware/email');
+const sharp = require('sharp');
+const multer = require('multer');
+
+
+
+const multerStorage = multer.memoryStorage();
+const multerFilter = (req,file,cb)=>{
+    if(file.mimetype.startsWith('image')){
+        cb(null,true)
+    }else{
+        cb(new AppError('Not an image! Please upload only images.',400),false)
+    }
+}
+const upload = multer({
+  storage:multerStorage,
+  fileFilter:multerFilter
+})
+
+exports.uploadAdminPhoto = upload.single('Image');
+exports.resizeAdminPhoto = catchAsync(async (req,res,next)=>{
+  if(!req.file) return next();
+  req.file.filename = `admin-${Date.now()}.jpeg`;
+
+  await sharp(req.file.buffer)
+  .resize(500,500)
+  .toFormat('jpeg')
+  .jpeg({ quality:90 })
+  .toFile(`./public/uploads/admins/${req.file.filename}`);
+
+  next();
+})
+const filterObj = (obj,...allowedFields)=>{
+  const newObj = {};
+  Object.keys(obj).forEach(el=>{
+      if(allowedFields.includes(el)) newObj[el] = obj[el];
+  })
+  return newObj;
+}
 
 
 exports.signup = catchAsync(async (req,res)=>{
+
+  console.log('inside the sign up');
     const admin = await Admin.create({
         username:req.body.username,
         password:req.body.password,
@@ -63,6 +103,61 @@ exports.login = catchAsync(async (req, res, next) => {
     res.status(200).json({status:
     "success"})
   }
+
+  exports.protect = catchAsync(async (req, res, next) => {
+    // 1) Getting token and check of it's there
+    let token;
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith('Bearer')
+    ) {
+      token = req.headers.authorization.split(' ')[1];
+    }
+  
+    if (!token) {
+      return next(
+        new AppError('You are not logged in! Please log in to get access.', 401)
+      );
+    }
+  
+    // 2) Verification token
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  
+    // 3) Check if user still exists
+    const currentAdmin = await Admin.findById(decoded.id);
+    if (!currentAdmin) {
+      return next(
+        new AppError(
+          'The admin belonging to this token does no longer exist.',
+          401
+        )
+      );
+    }
+  
+    // 4) Check if user changed password after the token was issued
+    if (currentAdmin.changedPasswordAfter(decoded.iat)) {
+      return next(
+        new AppError('admin recently changed password! Please log in again.', 401)
+      );
+    }
+  
+    // GRANT ACCESS TO PROTECTED ROUTE
+    req.admin = currentAdmin;
+    next();
+  });
+  
+  exports.restrictTo = (...roles) => {
+    return (req, res, next) => {
+      // roles ['admin', 'lead-guide']. role='user'
+      if (!roles.includes(req.admin.role)) {
+        return next(
+          new AppError('You do not have permission to perform this action', 403)
+        );
+      }
+  
+      next();
+    };
+  };
 
   exports.forgotPassword = catchAsync(async (req, res, next) => {
     // 1) Get user based on POSTed email
@@ -185,3 +280,24 @@ exports.login = catchAsync(async (req, res, next) => {
          admin
       });
     });
+ exports.updateAdminProfile =catchAsync(async (req,res,next)=>{
+      const filteredBody = filterObj(req.body,'email')
+      console.log("inside the update the profile");
+      if(req.file){
+        filteredBody.photo = req.file.filename;
+      }
+     
+      const admin = await  Admin.findByIdAndUpdate(req.params.id,filteredBody,{
+        new:true,
+        runValidators:true
+    
+      })
+      if(!admin){
+        return next(new AppError('There is no admin with that id',404))
+      }
+      res.status(200).json({
+        status:'success',
+        data:admin
+      })
+    
+    })
