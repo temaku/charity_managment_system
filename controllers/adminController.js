@@ -2,6 +2,7 @@ const Admin = require('../models/adminModel');
 const catchAsync = require('../middleware/catchAysnc');
 const AppError = require('../middleware/appError');
 const jwt = require('jsonwebtoken');
+const { promisify } = require('util');
 const crypto = require('crypto');
 const sendEmail = require('../middleware/email');
 const sharp = require('sharp');

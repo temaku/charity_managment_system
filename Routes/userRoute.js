@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('../controllers/userController');
 const authMiddleware = require('../middleware/authMiddleware');
+const adminController = require('../controllers/adminController');
 
 const router = express.Router();
 
@@ -14,11 +15,11 @@ userController.updateMe);
 router.delete('/deleteMe',userController.deleteMe);
 
 
-router.get('/',userController.getAllUser);
+router.get('/',adminController.protect,adminController.restrictTo("admin"),userController.getAllUser);
 router.route('/:id').
-get(userController.getUser).
-patch(userController.updateUser).
-delete(userController.deleteUser)
+get(adminController.protect,adminController.restrictTo("admin"),userController.getUser).
+patch(adminController.protect,adminController.restrictTo("admin"),userController.updateUser).
+delete(adminController.protect,adminController.restrictTo("admin"),userController.deleteUser)
 
 // router.use(authMiddleware.protect);
 
