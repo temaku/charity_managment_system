@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const reportController = require('../controllers/reportController');
-const { route } = require('./fundraiseRoute');
+const authMiddleware = require('../middleware/authMiddleware');
 
+
+router.use(authMiddleware.protect,authMiddleware.restrictTo("volunteers"));
 
 router.route('/').
 post(reportController.createReport).

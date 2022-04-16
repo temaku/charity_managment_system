@@ -20,11 +20,7 @@ const taskSchema = mongoose.Schema({
         type:String,
         required:[true,'Please provide the desc of the task']
     },
-    deadLine:{
-        type:Date,
-        required:true
-    },
-    AssignedAt:{
+    assignedAt:{
         type:Date,
         default:Date.now()
     }

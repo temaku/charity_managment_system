@@ -9,7 +9,7 @@ const FundraiseSchema = new mongoose.Schema({
         type:String,
         required:[true,'Please provide the description']
     },
-    Amount:{
+    amount:{
         type:Number,
         default:0
         },

@@ -15,7 +15,7 @@ const reportSchema = mongoose.Schema({
         default:'pending'
 
     },
-    volunteerId:{
+    volunterId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:[true,'Provide the voluteers id']
