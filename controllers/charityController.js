@@ -18,7 +18,7 @@ const upload = multer({
   fileFilter:multerFilter
 })
 
-exports.uploadcharityPhoto = upload.single('Image');
+exports.uploadcharityPhoto = upload.single('image');
 exports.resizeCharityPhoto = catchAsync(async (req,res,next)=>{
   if(!req.file) return next();
   req.file.filename = `charity-${Date.now()}.jpeg`;
@@ -77,11 +77,11 @@ exports.getAllCharity = catchAsync(async (req,res,next)=>{
   })
 exports.updateCharity =catchAsync(async (req,res,next)=>{
   const filteredBody = filterObj(req.body,'email')
- 
+   console.log("update");
   if(req.file){
-    filteredBody.Image = req.file.filename;
+    filteredBody.image = req.file.filename;
   }
-  console.log(filteredBody.Image);
+  console.log(filteredBody.image);
   const charity = await Charity.findByIdAndUpdate(req.params.id,filteredBody,{
     new:true,
     runValidators:true

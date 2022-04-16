@@ -23,7 +23,7 @@ const upload = multer({
   fileFilter:multerFilter
 })
 
-exports.uploadAdminPhoto = upload.single('Image');
+exports.uploadAdminPhoto = upload.single('image');
 exports.resizeAdminPhoto = catchAsync(async (req,res,next)=>{
   if(!req.file) return next();
   req.file.filename = `admin-${Date.now()}.jpeg`;
@@ -247,6 +247,19 @@ exports.login = catchAsync(async (req, res, next) => {
   
    
   });
+  exports.getAllAdmins = catchAsync(async (req,res,next)=>{
+    const admins = await Admin.find();
+    if(!admins){
+      return next( new AppError('No charity found ',404))
+    }
+    res.status(200).json({
+      status:"success",
+      count:admins.length,
+      data:admins
+    })
+    
+    
+  })
   
   exports.updatePassword = catchAsync(async (req, res, next) => {
     // 1) Get user from collection
@@ -282,17 +295,19 @@ exports.login = catchAsync(async (req, res, next) => {
       });
     });
  exports.updateAdminProfile =catchAsync(async (req,res,next)=>{
-      const filteredBody = filterObj(req.body,'email')
+   
+      const filteredBody = filterObj(req.body,'username,email')
       console.log("inside the update the profile");
       if(req.file){
         filteredBody.photo = req.file.filename;
       }
      
-      const admin = await  Admin.findByIdAndUpdate(req.params.id,filteredBody,{
+      const admin = await  Admin.findByIdAndUpdate(req.admin.id,filteredBody,{
         new:true,
         runValidators:true
     
       })
+      console.log("outsiede");
       if(!admin){
         return next(new AppError('There is no admin with that id',404))
       }
