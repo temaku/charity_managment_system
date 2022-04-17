@@ -15,7 +15,7 @@ userController.updateMe);
 router.delete('/deleteMe',userController.deleteMe);
 
 
-router.get('/',adminController.protect,adminController.restrictTo("admin"),userController.getAllUser);
+router.get('/',userController.getAllUser);
 router.route('/:id').
 get(adminController.protect,adminController.restrictTo("admin"),userController.getUser).
 patch(adminController.protect,adminController.restrictTo("admin"),userController.updateUser).

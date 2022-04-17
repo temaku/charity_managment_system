@@ -19,6 +19,12 @@ const donationSchema = new mongoose.Schema({
         default:'telebirr'
 
     },
+    status:{
+        type:String,
+        enum:['pending','Accepted','REjected'],
+        default:'pending'
+
+    },
     phone:{
         type:Number,
         required:[true,'please provide your phone number']
@@ -53,6 +59,7 @@ donationSchema.statics.DonationOfUser = async function(donorId){
         {
         $group:{
             _id:'$donor',
+            countDonations :{$sum:1},
             Amount:{$sum:'$donate'},
             
         }
@@ -62,7 +69,10 @@ donationSchema.statics.DonationOfUser = async function(donorId){
     console.log(stats);
    if(stats.length >0){
        await User.findByIdAndUpdate(donorId,{
-        donationHistory:stats[0].Amount
+        totalDonations:stats[0].Amount,
+        noOfDonation:stats[0].countDonations
+        
+
        })
 
    }

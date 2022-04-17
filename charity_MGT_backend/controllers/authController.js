@@ -11,7 +11,10 @@ exports.signup = catchAsync(async (req,res)=>{
         password:req.body.password,
         email:req.body.email,
         role:req.body.role,
-        photo:req.body.photo
+        photo:req.body.photo,
+        phone:req.body.phone,
+        address:req.body.address
+
  
     })
     user.password = undefined;

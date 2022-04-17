@@ -21,11 +21,28 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "default.jpg",
   },
+  phone:{
+    type:String,
+    default:"None"
+  },
+  address:{
+    type:String,
+    default:"None"
+  },
   role: {
     type: String,
     enum: ["donor", "volunteers"],
     default: "donor",
   },
+  noOfDonation:{
+    type:Number,
+    default:0
+  },
+  totalDonations:{
+    type:Number,
+    default:0
+  },
+
   password: {
     type: String,
     required: [true, "Please provide a password"],
@@ -37,8 +54,7 @@ const userSchema = new mongoose.Schema({
   passwordResetExpires: Date,
   active: {
     type: Boolean,
-    default: true,
-    select: false
+    default: false
   }
 },
 {

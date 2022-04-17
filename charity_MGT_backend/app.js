@@ -31,6 +31,7 @@ app.use(rateLimiter({
 app.use(cors());
 
 app.options('*', cors());
+app.use(express.static(__dirname+"/public/uploads"))
 
 app.use('/api/v1/auth',authRoutes);
 app.use('/api/v1/admin',adminRoute);
