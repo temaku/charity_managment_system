@@ -1,163 +1,148 @@
 import React, { useState } from "react";
-import { useAppSelector } from "../../app/hooks/redux_hooks";
-import { backendImageServer } from "../../app/services";
-import { usersSelector } from "../../app/store/features/users/usersSlice";
+import { useNavigate } from "react-router-dom";
+import AddArtistModal from "../Modals/AddArtist";
 
 type Props = {};
 
-const UsersTable = (props: Props) => {
+const DonationTable = (props: Props) => {
   const [show, setShow] = useState<number | null>(0);
-  const [selectedUserId, setSelectedUserId] = useState("");
-  const {searchUsersList, users} = useAppSelector(usersSelector)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const onCloseModal = () => {
+    console.log("closing modal");
+    setIsModalOpen(false);
+  };
 
-  
-  // const [users, setUsers] = useState([
-  //   {
-  //     id: "23243234234234",
-  //     fullName: "John Doe",
-  //     email: "email@email.com",
-  //     phone: "1234567890",
-  //     isActive: true,
-  //     avatar: "https://cdn.tuk.dev/assets/templates/olympus/projects(3).png",
-  //     subType: {
-  //       subscriptionType: "free",
-  //       subscriptionId: "free-subscription",
-  //       summary: "Free Subscription",
-  //       price: 0,
-  //     },
-  //     address: {
-  //       country: "Ethiopia",
-  //       city: "Addis Ababa",
-  //       street: "Kenya",
-  //       zip: "12345",
-  //     },
-  //     createdAt: "2020-01-01",
-  //   },
-  //   {
-  //     id: "322323234",
-  //     fullName: "Jane Doe",
-  //     email: "email@email.com",
-  //     phone: "1234567890",
-  //     isActive: true,
-  //     avatar: "https://cdn.tuk.dev/assets/templates/olympus/projects(1).png",
-  //     address: {
-  //       country: "USA",
-  //       city: "New York",
-  //       street: "123 Main St",
-  //       zip: "12345",
-  //     },
-  //     subType: {
-  //       subscriptionType: "free",
-  //       subscriptionId: "free-subscription",
-  //       summary: "Free Subscription",
-  //       price: 0,
-  //     },
-  //     createdAt: "2020-01-01",
-  //   },
-  //   {
-  //     id: "wef3232423423423",
-  //     fullName: "Thomas Doe",
-  //     email: "email@email.com",
-  //     phone: "1234567890",
-  //     isActive: true,
-  //     avatar: "https://cdn.tuk.dev/assets/templates/olympus/projects(2).png",
-  //     address: {
-  //       country: "UK",
-  //       city: "London",
-  //       street: "123 Main St",
-  //       zip: "12345",
-  //     },
-  //     subType: {
-  //       subscriptionType: "free",
-  //       subscriptionId: "free-subscription",
-  //       summary: "Free Subscription",
-  //       price: 0,
-  //     },
-  //     createdAt: "2020-01-01",
-  //   },
-  // ]);
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+  const handleArtistsDetails = (id: string) => (e: any) => {
+    console.log("hello world");
+    navigate(`donation/${id}`);
+  };
+
+  const [artists, setArtists] = useState([
+    {
+      id: "23243234234234",
+      fullName: "John Doe",
+      avatar: "https://cdn.tuk.dev/assets/templates/olympus/projects(3).png",
+      followers: 12,
+      listenedHours: 4239,
+      albumsCount: 21,
+      songsCount: 21,
+      createdAt: "2020-01-01",
+    },
+    {
+      id: "322323234",
+      fullName: "Jane Doe",
+      avatar: "https://cdn.tuk.dev/assets/templates/olympus/projects(1).png",
+      followers: 12,
+      listenedHours: 4239,
+      albumsCount: 21,
+      songsCount: 21,
+      createdAt: "2020-01-01",
+    },
+    {
+      id: "wef3232423423423",
+      fullName: "Thomas Doe",
+      avatar: "https://cdn.tuk.dev/assets/templates/olympus/projects(1).png",
+      followers: 12,
+      listenedHours: 4239,
+      albumsCount: 21,
+      songsCount: 21,
+      createdAt: "2020-01-01",
+    },
+  ]);
 
   return (
     <>
+      {isModalOpen && (
+        <AddArtistModal onClose={onCloseModal} onSubmit={() => {}} />
+      )}
       <div className="w-full">
         <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
           <div className="sm:flex items-center justify-between">
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
-              Users
+              Donation
             </p>
+            <div>
+              <button
+                onClick={handleModalOpen}
+                className="inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
+              >
+                <p className="text-sm font-medium leading-none text-white">
+                  Update Donotion
+                </p>
+              </button>
+            </div>
           </div>
         </div>
         <div className="bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">
           <table className="w-full whitespace-nowrap">
             <thead>
               <tr className="h-16 w-full text-sm leading-none text-gray-800">
-                <th className="font-normal text-left pl-4">Username</th>
-                <th className="font-normal text-left pl-12">Email</th>
-                <th className="font-normal text-left pl-12">CountDonations</th>
-                <th className="font-normal text-left pl-20">TotalDonations</th>
-                <th className="font-normal text-left pl-20">Phone </th>
+                <th className="font-normal text-left pl-4">Charity</th>
+                <th className="font-normal text-left pl-12">Donor</th>
+                <th className="font-normal text-left pl-12">DonationOption</th>
                 <th className="font-normal text-left pl-20">Status</th>
-                <th className="font-normal text-left pl-16">Address</th>
-                <th className="font-normal text-left pl-20">CreatedAt</th>
+                <th className="font-normal text-left pl-20">Phone</th>
+                <th className="font-normal text-left pl-20">Amount</th>
+                <th className="font-normal text-left pl-20">DonatedAt</th>
               </tr>
             </thead>
             <tbody className="w-full">
-              {users.length > 0 &&
-                users.map((user, index) => {
+              {artists.length > 0 &&
+                artists.map((artist) => {
                   return (
                     <tr
-                      key={user.id}
-                      className="h-20 text-sm leading-none text-gray-800 border-b border-t bg-white hover:bg-gray-100 border-gray-100"
+                      onClick={handleArtistsDetails(artist.id)}
+                      key={artist.id}
+                      className="h-20 handleArtistsDetails text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100"
                     >
                       <td className="pl-4 cursor-pointer">
                         <div className="flex items-center">
                           <div className="w-10 h-10">
-                            <img className="w-full h-full" src={`${backendImageServer}/users/${user.photo}`} alt={user.fullName} />
+                            <img
+                              className="w-full h-full"
+                              src={artist.avatar}
+                            />
                           </div>
                           <div className="pl-4">
-                            <p className="font-medium">{user.username}</p>
+                            <p className="font-medium">{artist.fullName}</p>
+                            {/* <p className="text-xs leading-3 text-gray-600 pt-2">
+                              Herman Group
+                            </p> */}
                           </div>
                         </div>
                       </td>
                       <td className="pl-12">
                         <p className="text-sm font-medium leading-none text-gray-800">
-                          {user.email}
+                          {artist.followers}
                         </p>
                         <div className="w-24 h-3 bg-gray-100 rounded-full mt-2">
-                          <div className="w-6 h-3 bg-green-progress rounded-full" />
+                          <div className="w-20 h-3 bg-green-progress rounded-full" />
                         </div>
                       </td>
                       <td className="pl-12">
-                        <p className="font-medium">{user.noOfDonation }</p>
-                      </td>
-                      
-                      <td className="pl-20">
-                        <p className="font-medium">
-                          {user.totalDonations}
-                        </p>
+                        <p className="font-medium">{artist.listenedHours}</p>
+                        {/* <p className="text-xs leading-3 text-gray-600 mt-2">
+                          5 tasks pending
+                        </p> */}
                       </td>
                       <td className="pl-20">
-                        <p className="font-medium">
-                          {user.phone}
-                        </p>
+                        <p className="font-medium">{artist.albumsCount}</p>
                       </td>
                       <td className="pl-20">
-                        <p className="font-medium">
-                          false
-                          
-
-                        </p>
-                      </td>
-                      <td className="pl-20">
-                        <p className="font-medium">
-                          {user.address}
+                        <p className="font-medium">{artist.songsCount}</p>
+                        <p className="text-xs leading-3 text-gray-600 mt-2">
+                          Single: 10
                         </p>
                       </td>
 
                       <td className="px-7 2xl:px-0">
-                        {false ? (
+                        {show == 0 ? (
                           <button
-                            onClick={() => setSelectedUserId(user.id)}
+                            onClick={() => setShow(null)}
                             className="focus:outline-none pl-7"
                           >
                             <svg
@@ -192,7 +177,7 @@ const UsersTable = (props: Props) => {
                           </button>
                         ) : (
                           <button
-                            onClick={() => setSelectedUserId("")}
+                            onClick={() => setShow(0)}
                             className="focus:outline-none pl-7"
                           >
                             <svg
@@ -226,7 +211,7 @@ const UsersTable = (props: Props) => {
                             </svg>
                           </button>
                         )}
-                        {show == 1 && (
+                        {show == 0 && (
                           <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 ">
                             <div className="text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                               <p>Edit</p>
@@ -248,4 +233,4 @@ const UsersTable = (props: Props) => {
   );
 };
 
-export default UsersTable;
+export default DonationTable;

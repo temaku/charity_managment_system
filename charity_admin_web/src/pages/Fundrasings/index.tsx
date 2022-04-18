@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 import BaseLayout from "../../common/Layout";
 import Pagination from "../../common/Paginations";
-import EventsTable from "../../components/EventsTable";
+import FundrasingTable from "../../components/FundrasingsTable";
 
-function EventsPage() {
+function FundrasingsPage() {
   return (
     <BaseLayout>
       <main>
-        <EventsTable />
+        <FundrasingTable />
         <Pagination />
       </main>
     </BaseLayout>
   );
 }
 
-export default EventsPage;
+export default FundrasingsPage;

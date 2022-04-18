@@ -1,163 +1,135 @@
 import React, { useState } from "react";
-import { useAppSelector } from "../../app/hooks/redux_hooks";
-import { backendImageServer } from "../../app/services";
-import { usersSelector } from "../../app/store/features/users/usersSlice";
+import AddAlbumModal from "../Modals/AddAlbum";
+import AddSongModal from "../Modals/AddSong";
 
 type Props = {};
 
-const UsersTable = (props: Props) => {
+const SongsTable = (props: Props) => {
   const [show, setShow] = useState<number | null>(0);
-  const [selectedUserId, setSelectedUserId] = useState("");
-  const {searchUsersList, users} = useAppSelector(usersSelector)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  
-  // const [users, setUsers] = useState([
-  //   {
-  //     id: "23243234234234",
-  //     fullName: "John Doe",
-  //     email: "email@email.com",
-  //     phone: "1234567890",
-  //     isActive: true,
-  //     avatar: "https://cdn.tuk.dev/assets/templates/olympus/projects(3).png",
-  //     subType: {
-  //       subscriptionType: "free",
-  //       subscriptionId: "free-subscription",
-  //       summary: "Free Subscription",
-  //       price: 0,
-  //     },
-  //     address: {
-  //       country: "Ethiopia",
-  //       city: "Addis Ababa",
-  //       street: "Kenya",
-  //       zip: "12345",
-  //     },
-  //     createdAt: "2020-01-01",
-  //   },
-  //   {
-  //     id: "322323234",
-  //     fullName: "Jane Doe",
-  //     email: "email@email.com",
-  //     phone: "1234567890",
-  //     isActive: true,
-  //     avatar: "https://cdn.tuk.dev/assets/templates/olympus/projects(1).png",
-  //     address: {
-  //       country: "USA",
-  //       city: "New York",
-  //       street: "123 Main St",
-  //       zip: "12345",
-  //     },
-  //     subType: {
-  //       subscriptionType: "free",
-  //       subscriptionId: "free-subscription",
-  //       summary: "Free Subscription",
-  //       price: 0,
-  //     },
-  //     createdAt: "2020-01-01",
-  //   },
-  //   {
-  //     id: "wef3232423423423",
-  //     fullName: "Thomas Doe",
-  //     email: "email@email.com",
-  //     phone: "1234567890",
-  //     isActive: true,
-  //     avatar: "https://cdn.tuk.dev/assets/templates/olympus/projects(2).png",
-  //     address: {
-  //       country: "UK",
-  //       city: "London",
-  //       street: "123 Main St",
-  //       zip: "12345",
-  //     },
-  //     subType: {
-  //       subscriptionType: "free",
-  //       subscriptionId: "free-subscription",
-  //       summary: "Free Subscription",
-  //       price: 0,
-  //     },
-  //     createdAt: "2020-01-01",
-  //   },
-  // ]);
+  const onCloseModal = () => {
+    console.log("closing modal");
+    setIsModalOpen(false);
+  };
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const [songs, setSongs] = useState([
+    {
+      id: "23323455232",
+      title: "Single",
+      cover: "https://cdn.tuk.dev/assets/templates/olympus/projects(3).png",
+      artist: "sfasasfda",
+      releaseDate: "2020-02-01",
+      songs: 21,
+      createdAt: "2020-01-01",
+    },
+    {
+      id: "3234234234",
+      title: "John Doe",
+      cover: "https://cdn.tuk.dev/assets/templates/olympus/projects(3).png",
+      artist: "sfasasfda",
+      releaseDate: "2020-02-01",
+      songs: 21,
+      createdAt: "2020-01-01",
+    },
+    {
+      id: "1232322323234",
+      title: "Thomas Doe",
+      cover: "https://cdn.tuk.dev/assets/templates/olympus/projects(1).png",
+      artist: "sfasasfda",
+      releaseDate: "2020-01-01",
+      songs: 21,
+      createdAt: "2020-01-02",
+    },
+    {
+      id: "1wef3232423423423",
+      title: "Thomas Doe",
+
+      cover: "https://cdn.tuk.dev/assets/templates/olympus/projects(2).png",
+      artist: "asdfasdfwerwe",
+      releaseDate: "2020-05-01",
+      songs: 21,
+      createdAt: "2020-01-01",
+    },
+  ]);
 
   return (
     <>
+      {isModalOpen && (
+        <AddSongModal onClose={onCloseModal} onSubmit={() => {}} />
+      )}
       <div className="w-full">
         <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
           <div className="sm:flex items-center justify-between">
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
-              Users
+              Songs
             </p>
+            <div>
+              <button
+                onClick={handleModalOpen}
+                className="inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
+              >
+                <p className="text-sm font-medium leading-none text-white">
+                  Add Songs
+                </p>
+              </button>
+            </div>
           </div>
         </div>
         <div className="bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">
           <table className="w-full whitespace-nowrap">
             <thead>
               <tr className="h-16 w-full text-sm leading-none text-gray-800">
-                <th className="font-normal text-left pl-4">Username</th>
-                <th className="font-normal text-left pl-12">Email</th>
-                <th className="font-normal text-left pl-12">CountDonations</th>
-                <th className="font-normal text-left pl-20">TotalDonations</th>
-                <th className="font-normal text-left pl-20">Phone </th>
-                <th className="font-normal text-left pl-20">Status</th>
-                <th className="font-normal text-left pl-16">Address</th>
-                <th className="font-normal text-left pl-20">CreatedAt</th>
+                <th className="font-normal text-left pl-4">Title</th>
+                <th className="font-normal text-left pl-12">Artist</th>
+                <th className="font-normal text-left pl-12">Released Date</th>
+                <th className="font-normal text-left pl-20">Songs</th>
+                <th className="font-normal text-left pl-20">Created Date</th>
               </tr>
             </thead>
             <tbody className="w-full">
-              {users.length > 0 &&
-                users.map((user, index) => {
+              {songs.length &&
+                songs.map((song) => {
                   return (
-                    <tr
-                      key={user.id}
-                      className="h-20 text-sm leading-none text-gray-800 border-b border-t bg-white hover:bg-gray-100 border-gray-100"
-                    >
+                    <tr className="h-20 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100">
                       <td className="pl-4 cursor-pointer">
                         <div className="flex items-center">
                           <div className="w-10 h-10">
-                            <img className="w-full h-full" src={`${backendImageServer}/users/${user.photo}`} alt={user.fullName} />
+                            <img className="w-full h-full" src={song.cover} />
                           </div>
                           <div className="pl-4">
-                            <p className="font-medium">{user.username}</p>
+                            <p className="font-medium">{song.title}</p>
                           </div>
                         </div>
                       </td>
                       <td className="pl-12">
                         <p className="text-sm font-medium leading-none text-gray-800">
-                          {user.email}
+                          {song.artist}
                         </p>
                         <div className="w-24 h-3 bg-gray-100 rounded-full mt-2">
-                          <div className="w-6 h-3 bg-green-progress rounded-full" />
+                          <div className="w-20 h-3 bg-green-progress rounded-full" />
                         </div>
                       </td>
                       <td className="pl-12">
-                        <p className="font-medium">{user.noOfDonation }</p>
-                      </td>
-                      
-                      <td className="pl-20">
-                        <p className="font-medium">
-                          {user.totalDonations}
+                        <p className="font-medium">{song.releaseDate}</p>
+                        <p className="text-xs leading-3 text-gray-600 mt-2">
+                          before 5 years
                         </p>
                       </td>
                       <td className="pl-20">
-                        <p className="font-medium">
-                          {user.phone}
-                        </p>
+                        <p className="font-medium">{song.songs}</p>
                       </td>
                       <td className="pl-20">
-                        <p className="font-medium">
-                          false
-                          
-
-                        </p>
+                        <p className="font-medium">{song.createdAt}</p>
                       </td>
-                      <td className="pl-20">
-                        <p className="font-medium">
-                          {user.address}
-                        </p>
-                      </td>
-
                       <td className="px-7 2xl:px-0">
-                        {false ? (
+                        {show == 0 ? (
                           <button
-                            onClick={() => setSelectedUserId(user.id)}
+                            onClick={() => setShow(null)}
                             className="focus:outline-none pl-7"
                           >
                             <svg
@@ -192,7 +164,7 @@ const UsersTable = (props: Props) => {
                           </button>
                         ) : (
                           <button
-                            onClick={() => setSelectedUserId("")}
+                            onClick={() => setShow(0)}
                             className="focus:outline-none pl-7"
                           >
                             <svg
@@ -226,7 +198,7 @@ const UsersTable = (props: Props) => {
                             </svg>
                           </button>
                         )}
-                        {show == 1 && (
+                        {show == 0 && (
                           <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 ">
                             <div className="text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                               <p>Edit</p>
@@ -248,4 +220,4 @@ const UsersTable = (props: Props) => {
   );
 };
 
-export default UsersTable;
+export default SongsTable;
