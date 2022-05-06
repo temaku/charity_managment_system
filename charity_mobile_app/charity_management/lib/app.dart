@@ -1,4 +1,5 @@
 import 'package:charity_management/constants.dart';
+import 'package:charity_management/screens/Navigation/tabbar.dart';
 import 'package:charity_management/screens/Signup/signup.dart';
 import 'package:charity_management/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +12,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Charity Management',
       theme: ThemeData(
-        
-        primaryColor: kPrimaryColor,
-        
+       // primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: SignUp(),
+      // themeMode: ThemeMode.dark,
+      // darkTheme: ThemeData(
+      //   bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      //     backgroundColor: Colors.black,
+      //   )
+      // ),
+      home: Tabbar(),
     );
   }
 }
