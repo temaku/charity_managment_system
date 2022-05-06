@@ -1,4 +1,5 @@
 import 'package:charity_management/constants.dart';
+import 'package:charity_management/screens/Signup/signup.dart';
 import 'package:charity_management/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: WelcomeScreen(),
+      home: SignUp(),
     );
   }
 }

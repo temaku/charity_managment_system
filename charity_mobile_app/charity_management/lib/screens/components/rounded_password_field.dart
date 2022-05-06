@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 
 class RoundedPasswordField extends StatelessWidget {
   final ValueChanged<String> onChanged;
+  final String hintText;
   const RoundedPasswordField({
     Key key,
     this.onChanged,
+    this.hintText = 'Password',
   }) : super(key: key);
 
   @override
@@ -18,7 +20,7 @@ class RoundedPasswordField extends StatelessWidget {
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
-          hintText: "Password",
+          hintText: hintText,
           icon: Icon(
             Icons.lock,
             color: kPrimaryColor,
