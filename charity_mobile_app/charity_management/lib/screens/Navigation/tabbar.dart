@@ -18,7 +18,7 @@ class _TabbarState extends State<Tabbar> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home',),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: "Donate",),
+          BottomNavigationBarItem(icon: Icon(Icons.money_off_csred_sharp), label: "Donate",),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "me",)
 
         ],
@@ -40,7 +40,7 @@ class _TabbarState extends State<Tabbar> {
         ],
         
       ),
-      body: HomeBody(),
+      body: HomeBody(), 
     );
   }
 
