@@ -1,5 +1,8 @@
 import 'package:charity_management/screens/Home/home.dart';
 import 'package:charity_management/screens/Home/home_body.dart';
+import 'package:charity_management/screens/Login/login.dart';
+import 'package:charity_management/screens/Signup/signup.dart';
+import 'package:charity_management/screens/welcome/welcome_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +15,7 @@ class Tabbar extends StatefulWidget {
 
 class _TabbarState extends State<Tabbar> {
   int _selectedIndex = 0;
+  PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +44,16 @@ class _TabbarState extends State<Tabbar> {
         ],
         
       ),
-      body: HomeBody(), 
+      body: PageView(
+        controller: _pageController,
+        children: [
+          HomeBody(),
+          LoginScreen(),
+          SignUp(),
+         
+        ],
+      ),
+       
     );
   }
 
@@ -48,5 +61,7 @@ class _TabbarState extends State<Tabbar> {
     setState(() {
       _selectedIndex = index;
     });
+    _pageController.jumpToPage(index);
+    //_pageController.animateToPage(index, duration: Duration(milliseconds: 1000), curve: Curves.bounceOut);
   }
 }
