@@ -1,0 +1,131 @@
+.app-body{
+  background-color: #fff !important;
+}
+
+#components-layout-demo-top-side-2 .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.ant-row-rtl #components-layout-demo-top-side-2 .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+}
+
+.site-layout-background {
+  background: #fff;
+  
+}
+
+#components-layout-demo-custom-trigger .trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+  display: flex;
+  justify-items: flex-end;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+/* .active {
+  background-color: rgb(241, 231, 241) !important;
+  border-radius: 10px  0px  0px 10px;
+  width: 100% !important;
+  background: #1890ff;
+ }
+.active span{
+  color: rgb(177, 67, 177);
+}
+
+.active:hover{
+  background-color: white;
+} */
+
+/* .ant-menu > .ant-menu-item:hover,
+.ant-menu > .ant-menu-submenu:hover,
+.ant-menu > .ant-menu-item-active,
+.ant-menu> .ant-menu-submenu-active,
+.ant-menu > .ant-menu-item-open,
+.ant-menu> .ant-menu-submenu-open,
+.ant-menu > .ant-menu-item-selected,
+.ant-menu > .ant-menu-submenu-selected {
+  color: red !important;
+} */
+
+.ant-menu-item-selected , .ant-menu-item-selected .nav-text {
+  color: rgb(177, 67, 177) !important;
+  background-color: rgb(241, 231, 241) !important;
+}
+
+
+/* media query */
+
+@media only screen and (max-width: 600px) {
+  .sidebar-container {
+    width: 0px !important;
+    background-color: red;
+    display: none !important;
+  }
+  .ant-layout-sidebar{
+    display: none !important;
+  }
+  .site-layout{
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin-top: 20px !important;
+  }
+  .navbar-container{
+    width: 100% !important;
+    padding-left: 5px !important;
+    padding-right: 0px !important;
+    background-color: #fff !important;
+    position: fixed !important;
+    z-index: 1 !important;
+
+  }
+  .body_content{
+    padding: 16px !important;
+    margin-top: 30px !important;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .sidebar-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+  }
+  .site-layout{
+    margin-left: 270px !important;
+    padding: 0 24px 24px !important;
+  }
+  .navbar-container{
+    position: fixed !important;
+    z-index: 1 !important;
+    width: 100% !important;
+    background: #fff !important;
+  }
+  .body_content{
+    padding: 16px !important;
+    margin-top: 50px !important;
+  }
+}
