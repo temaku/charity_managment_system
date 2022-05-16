@@ -210,7 +210,7 @@ const CharityTable = (props: Props) => {
                             </svg>
                           </button>
                         )}
-                        {show == 0 && (
+                        {/* {show == 0 && (
                           <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 ">
                             <div className="text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                               <p>Edit</p>
@@ -219,7 +219,7 @@ const CharityTable = (props: Props) => {
                               <p>Delete</p>
                             </div>
                           </div>
-                        )}
+                        )} */}
                       </td>
                     </tr>
                   );
