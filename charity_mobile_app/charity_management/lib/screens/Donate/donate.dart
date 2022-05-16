@@ -1,3 +1,4 @@
+import 'package:charity_management/screens/Donate/components/body.dart';
 import 'package:flutter/material.dart';
 
 class Donate extends StatelessWidget {
@@ -5,8 +6,6 @@ class Donate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-    );
+    return Body();
   }
 }

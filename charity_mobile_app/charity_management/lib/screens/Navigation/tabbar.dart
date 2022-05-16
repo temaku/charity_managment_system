@@ -1,6 +1,10 @@
+import 'package:charity_management/screens/Donate/donate.dart';
+import 'package:charity_management/screens/Event/event.dart';
+import 'package:charity_management/screens/History/history.dart';
 import 'package:charity_management/screens/Home/home.dart';
 import 'package:charity_management/screens/Home/home_body.dart';
 import 'package:charity_management/screens/Login/login.dart';
+import 'package:charity_management/screens/Profile/profile.dart';
 import 'package:charity_management/screens/Signup/signup.dart';
 import 'package:charity_management/screens/welcome/welcome_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,7 +43,7 @@ class _TabbarState extends State<Tabbar> {
         elevation: 0,
         //titleSpacing: 110,
         actions: [
-          IconButton(icon: Icon(Icons.history), onPressed: null),
+          IconButton(icon: Icon(Icons.history), onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context){return History();}));}),
           IconButton(icon: Icon(Icons.event), onPressed: null),
         ],
         
@@ -48,8 +52,9 @@ class _TabbarState extends State<Tabbar> {
         controller: _pageController,
         children: [
           HomeBody(),
-          LoginScreen(),
-          SignUp(),
+          Event(),
+          
+          
          
         ],
       ),
@@ -61,7 +66,13 @@ class _TabbarState extends State<Tabbar> {
     setState(() {
       _selectedIndex = index;
     });
-    _pageController.jumpToPage(index);
+   
+    if(index == 2){
+      Navigator.push(context, MaterialPageRoute(builder: (context){return Profile();}));
+    }else{
+       _pageController.jumpToPage(index);
+
+    }
     //_pageController.animateToPage(index, duration: Duration(milliseconds: 1000), curve: Curves.bounceOut);
   }
 }
