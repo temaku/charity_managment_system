@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import './login.css'
 
@@ -9,26 +9,46 @@ import { Form, Input, Button, Checkbox } from 'antd';
 
 import { useNavigate } from 'react-router-dom';
 
-import {ToastContainer } from 'react-toastify'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { reset, login } from '../../features/authSlice'
+
+
+import { toast, ToastContainer } from 'react-toastify'
 
 
 export const Login = () => {
 
-    const [loading, setLoading] =  React.useState(false)
+    const [loading, setLoading] = React.useState(false)
     const navigate = useNavigate()
 
+    const dispatch = useDispatch()
+
+    const { user, isError, isSuccess, isLoading, message } = useSelector((state) => state.auth)
+
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(message)
+        }
+        if (isSuccess) {
+            toast.success(message)
+            navigate('/dashboard')
+        }
+
+        // reset everything to initial
+        dispatch(reset())
+
+    }, [dispatch, navigate, isSuccess])
+
+
+    console.log("message: ", message)
 
     const onFinish = (values) => {
-        console.log("login values: ", values)
-        setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-            navigate("/dashboard")
-        }, 3000);
-        
-    }
+        console.log("values: ", values)
+        dispatch(login(values))
 
+    }
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -50,7 +70,7 @@ export const Login = () => {
                     </div>
 
                     <div className='flex flex-col items-center w-full'>
-                        <h3 className='header_3 hidden md:block'>Admin Panel</h3>
+                        <h3 className='header_3 hidden md:block'>Welcome to Charity Management</h3>
 
                         <div className='flex flex-col w-4/5'>
                             <Form
@@ -69,16 +89,16 @@ export const Login = () => {
                                 className=''
                             >
                                 <Form.Item
-                                    label="Email"
-                                    name="email"
+                                    label="userName"
+                                    name="username"
                                     rules={[
                                         {
                                             required: true,
-                                            message: 'Please input your email!',
+                                            message: 'Please input your userName!',
                                         },
                                     ]}
                                 >
-                                    <Input type="email" placeholder='charity@gmail.com' />
+                                    <Input type="text" placeholder='charity123' />
                                 </Form.Item>
 
                                 <Form.Item
@@ -119,7 +139,7 @@ export const Login = () => {
                                     <Button type="primary"
                                         htmlType="submit"
                                         className='ant-btn-primary-login'
-                                        loading={loading}
+                                        loading={isLoading}
                                     >
                                         Login
                                     </Button>
