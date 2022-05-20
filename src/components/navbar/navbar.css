@@ -1,0 +1,31 @@
+
+
+.watch-dog-logo{
+    width: 80px !important;
+    height: 60px !important;
+    object-fit: contain;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .navbar-menu{
+        width: 140px !important;
+        margin-top: -10px !important;
+    }
+    .navbar-right{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        
+    }
+}
+
+
+@media only screen and (min-width: 610px) {
+    .navbar-right{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        
+    }
+}

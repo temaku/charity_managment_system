@@ -1,0 +1,81 @@
+
+.login_left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(134.14deg, rgba(129, 36, 138, 0.2) 24.62%, rgba(231, 11, 137, 0.2) 91.2%);
+    border-radius: 8px 0px 0px 8px;
+}
+
+.image_div {
+  width: 290px;
+  height: 290px;
+}
+
+/* .logo_2 {
+    position: absolute;
+    width: 294.22px;
+    height: 87.8px;
+    left: 139px;
+    top: 287.2px;
+} */
+
+/* .right_container{
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    left: calc(50% - 400px/2 + 303.5px);
+    top: calc(50% - 400px/2);
+} */
+
+.header_3{
+    font: 'Robot';
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    align-self: center;
+    color: #595959;
+}
+
+
+.ant-btn-primary-login, .ant-btn-primary-login:hover{
+    background: linear-gradient(90deg, #81248A 0%, #E70B89 67.83%);
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+    border-radius: 100px;
+    width: 100%;
+    height: 40px;
+    margin: 22px 0px;
+}
+
+.password_forget_button{
+    border-radius: 2px;
+    color: #8D0B00;
+}
+.ant-form-item-label > label.ant-form-item-required:before {
+   content: unset;
+}
+
+@media only screen and (max-width: 600px) {
+  .ant-btn-primary-login {
+    margin: 0;
+  }
+  .logo_sm{
+    display: block;
+    width: 100px !important;
+    height: 100px !important;
+    align-self: center;
+    margin-left: 27%;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    margin-top: 20%;
+  }
+  .login_left{
+      display: none;
+  }
+  .login_container{
+      height: 100vh !important;
+      margin-top: 0% !important;
+      padding-top: 0% !important;
+  }
+
+}
