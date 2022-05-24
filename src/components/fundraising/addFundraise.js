@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import { Form, Input, Button,Spin,Select } from "antd";
 import { ToastContainer, toast } from "react-toastify";
@@ -22,6 +23,20 @@ const AddFundraise = () => {
   const onFinish = (values) => {
     console.log("values: ", values);
     addFundraise(values)
+=======
+import React, { useState } from "react";
+import { Form, Input, Button } from "antd";
+
+
+const AddFundraise = () => {
+  const [form] = Form.useForm();
+  
+
+
+
+  const onFinish = (values) => {
+    console.log("values: ", values);
+>>>>>>> fe7008cdac84f8b12ed535f97fc5d1b1b123ad52
     // dispatch(login(values));
   };
 
@@ -29,6 +44,7 @@ const AddFundraise = () => {
     console.log("Failed:", errorInfo);
   };
   return (
+<<<<<<< HEAD
     <>
       <ToastContainer />
 
@@ -47,6 +63,9 @@ const AddFundraise = () => {
           </div>
         }
 
+=======
+    <div className="flex flex-col items-center justify-center w-full">
+>>>>>>> fe7008cdac84f8b12ed535f97fc5d1b1b123ad52
       <div className="my-10 my-10 w-2/3 px-10 py-5 shadow-xl">
       <Form
         form={form}
@@ -103,7 +122,10 @@ const AddFundraise = () => {
       </Form>
     </div>
     </div>
+<<<<<<< HEAD
     </>
+=======
+>>>>>>> fe7008cdac84f8b12ed535f97fc5d1b1b123ad52
   );
 };
 
