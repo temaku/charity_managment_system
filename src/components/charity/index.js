@@ -1,2 +1,1 @@
-
 export {Charity} from './Charity'

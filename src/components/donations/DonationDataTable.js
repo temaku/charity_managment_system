@@ -170,7 +170,7 @@ export const DonationDataTable = () => {
         },
         {
             key: "createdAt",
-            title: "Cteated At",
+            title: "Created At",
             dataIndex: "createdAt"
         },
     ]

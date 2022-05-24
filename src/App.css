@@ -17,14 +17,14 @@
   color: rgb(177, 67, 177);
 }
 
-.active{
+/* .active{
   background-color: rgb(241, 231, 241) !important;
   border-radius: 10px  0px  0px 10px;
- }
+ } */
 
-.active span{
+/* .active span{
   color: rgb(177, 67, 177);
-}
+} */
 
 .ant-btn-primary {
   background-color: #8D0B00;

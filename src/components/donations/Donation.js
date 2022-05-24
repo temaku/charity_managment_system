@@ -13,13 +13,13 @@ export const Donation = () => {
                         <p className='font-bold text-md text-gray-800'>Donation</p>
                     </div>
 
-                    <div className='mt-4  md:justify-end'>
+                    {/* <div className='mt-4  md:justify-end'>
                         <Button
                             type='primary'
                             className='px-7'>
                             Add Donation
                         </Button>
-                    </div>
+                    </div> */}
 
                 </div>
 
