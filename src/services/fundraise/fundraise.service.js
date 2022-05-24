@@ -21,13 +21,21 @@ export const fundraiseApi = createApi({
     tagTypes: [tagType],
     endpoints: (builder) => ({
         getAllFundraisess: builder.query({
+<<<<<<< HEAD
             query: () => '/v1/fundraises',
+=======
+            query: () => '/v1/fundraise',
+>>>>>>> fe7008cdac84f8b12ed535f97fc5d1b1b123ad52
             providesTags: (result) => providesTagsHelper(result, tagType, "FUNDRAISE"),
         }),
        
         addFundraise: builder.mutation({
             query: body => ({
+<<<<<<< HEAD
                 url: '/v1/fundraises',
+=======
+                url: '/v1/fundraise',
+>>>>>>> fe7008cdac84f8b12ed535f97fc5d1b1b123ad52
                 method: 'POST',
                 body
             }),
