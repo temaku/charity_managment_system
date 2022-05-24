@@ -1,0 +1,40 @@
+
+.add_user_button{
+    background: #8D0B00;
+    border: 1px solid #DD2516;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+    border-radius: 2px;
+    color: white;
+    align-items: center;
+}
+
+.user_done_button{
+    background: #8D0B00;
+    border: 1px solid #8D0B00;
+    box-sizing: border-box;
+   padding-left: 10px;
+}
+
+.user_upload_icon{
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #8D0B00;
+    text-align: center;
+    right: 169px;
+    top: 125px;
+    color: wheat;
+    border: white 2px solid;
+}
+
+.user_upload_icon:hover {
+     background: #8D0B00;
+    color: wheat;
+}
+
+.user_modal_style{
+    width: 460px !important;
+    padding: 10px;
+}
