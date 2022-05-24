@@ -4,6 +4,9 @@ import { Home } from '../Home'
 import { CharityDataTable } from './CharityDataTable'
 import { Link } from "react-router-dom";
 
+
+//charity manager
+
 export const Charity = () => {
     return (
         
