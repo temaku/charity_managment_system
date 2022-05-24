@@ -5,10 +5,10 @@ import { API_BASE_URL } from '../../common'
 import { token } from '../auth-header'
 import { providesTagsHelper, providesTagsHelperObject } from '../providesTagsHelper'
 
-const tagType = "User"
+const tagType = "Charity"
 
-export const usersApi = createApi({
-    reducerPath: "usersApi",
+export const charityApi = createApi({
+    reducerPath: "charityApi",
     baseQuery: fetchBaseQuery({
         baseUrl: API_BASE_URL, prepareHeaders: (headers, { getToken }) => {
             const _token = token()
@@ -20,14 +20,14 @@ export const usersApi = createApi({
     }),
     tagTypes: [tagType],
     endpoints: (builder) => ({
-        getAllUsers: builder.query({
-            query: () => '/v1/users',
-            providesTags: (result) => providesTagsHelper(result, tagType, "USER"),
+        getAllCharities: builder.query({
+            query: () => '/v1/charities',
+            providesTags: (result) => providesTagsHelper(result, tagType, "CHARITY"),
         }),
        
-        addUser: builder.mutation({
+        addCharity: builder.mutation({
             query: body => ({
-                url: '/v1/auth/signup',
+                url: '/v1/charities',
                 method: 'POST',
                 body
             }),
@@ -40,9 +40,9 @@ export const usersApi = createApi({
 
 
 export const { 
-    useGetAllUsersQuery, 
-    useAddUserMutation,
-} = usersApi
+    useGetAllCharitiesQuery, 
+    useAddCharityMutation,
+} = charityApi
 
 
 

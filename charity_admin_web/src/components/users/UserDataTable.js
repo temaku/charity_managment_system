@@ -3,139 +3,23 @@
 import React from 'react'
 import { Table } from 'antd';
 
+import { useGetAllUsersQuery } from '../../services/user/user.service'
 
 export const UserDataTable = () => {
 
 
-    const usersData = [
-        {
-            id: 1,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
-        },
-        {
-            id: 2,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
-        },
-        {
-            id: 3,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
-        },
-        {
-            id: 4,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
-        },
-        {
-            id: 5,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
-        },
-        {
-            id: 6,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
-        },
-        {
-            id: 7,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
-        },
-        {
-            id: 8,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
-        },
-        {
-            id: 9,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
-        },
-        {
-            id: 10,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
-        },
-        {
-            id: 11,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
-        }
-    ]
+    const { data, isError, isFetching, isLoading, isSuccess, error } = useGetAllUsersQuery()
+    const allUsers = data?.data
+
+
+    console.log("allUsers: ", allUsers)
+
 
     const columns = [
         {
             key: "userName",
             title: "User Name",
-            dataIndex: "userName"
+            dataIndex: "username"
         },
         {
             key: "email",
@@ -143,14 +27,9 @@ export const UserDataTable = () => {
             dataIndex: "email"
         },
         {
-            key: "countDonations",
-            title: "Count Donations",
-            dataIndex: "countDonations"
-        },
-        {
-            key: "totalDonations",
-            title: "Total Donations",
-            dataIndex: "totalDonations"
+            key: "noOfDonation",
+            title: "No of Donation",
+            dataIndex: "noOfDonation"
         },
         {
             key: "phone",
@@ -158,37 +37,56 @@ export const UserDataTable = () => {
             dataIndex: "phone"
         },
         {
-            key: "status",
-            title: "Status",
-            dataIndex: "status",
-            render: (status) => (
-                <div className='flex'>
-                    <p className='text-green-600'>{status}</p>
-                </div>
-            )
-        },
-        {
             key: "address",
             title: "Address",
             dataIndex: "address"
         },
+
         {
-            key: "createdAt",
-            title: "Cteated At",
-            dataIndex: "createdAt"
+            key: "role",
+            title: "Role",
+            dataIndex: "role"
+        },
+        {
+            key: "status",
+            title: "Status",
+            dataIndex: "status",
+            render: (status) => (
+                <div>
+                    {
+                        status ? "ACTIVE" : "INACTIVE"
+                    }
+                </div>
+            )
         },
     ]
 
-    
+
 
 
 
     return (
         <div className='flex flex-col'>
 
-            
+            {
+                isError &&
+                <div className='flex mt-3'>
+                    <p className='text-red-500 text-md font-bold mx-3'>
+                        {error?.name || error?.status}
+                    </p>
+                    <p className='text-red-500 text-md font-bold'>
+                        {error?.message || error?.data.message}
+                    </p>
+                </div>
+            }
+
             <div className='mt-8'>
-                <Table dataSource={usersData} columns={columns} pagination={true} rowKey="id" />
+                <Table 
+                dataSource={allUsers} 
+                columns={columns} 
+                pagination={true} 
+                loading={isLoading}
+                rowKey="id" />
             </div>
 
         </div>

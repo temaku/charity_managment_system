@@ -5,10 +5,10 @@ import { API_BASE_URL } from '../../common'
 import { token } from '../auth-header'
 import { providesTagsHelper, providesTagsHelperObject } from '../providesTagsHelper'
 
-const tagType = "User"
+const tagType = "Fundraise"
 
-export const usersApi = createApi({
-    reducerPath: "usersApi",
+export const fundraiseApi = createApi({
+    reducerPath: "fundraiseApi",
     baseQuery: fetchBaseQuery({
         baseUrl: API_BASE_URL, prepareHeaders: (headers, { getToken }) => {
             const _token = token()
@@ -20,14 +20,14 @@ export const usersApi = createApi({
     }),
     tagTypes: [tagType],
     endpoints: (builder) => ({
-        getAllUsers: builder.query({
-            query: () => '/v1/users',
-            providesTags: (result) => providesTagsHelper(result, tagType, "USER"),
+        getAllFundraisess: builder.query({
+            query: () => '/v1/fundraises',
+            providesTags: (result) => providesTagsHelper(result, tagType, "FUNDRAISE"),
         }),
        
-        addUser: builder.mutation({
+        addFundraise: builder.mutation({
             query: body => ({
-                url: '/v1/auth/signup',
+                url: '/v1/fundraises',
                 method: 'POST',
                 body
             }),
@@ -40,9 +40,9 @@ export const usersApi = createApi({
 
 
 export const { 
-    useGetAllUsersQuery, 
-    useAddUserMutation,
-} = usersApi
+    useGetAllFundraisessQuery, 
+    useAddFundraiseMutation,
+} = fundraiseApi
 
 
 

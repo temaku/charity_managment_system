@@ -3,176 +3,110 @@ import React from 'react'
 
 export const EventDataTable = () => {
 
-    const usersData = [
+    const eventsData = [
         {
             id: 1,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
+            title:"Helping other",
+            description:"this is description",
+            date:"2030/04/02",
+            organizer:"mekedonia"
+
+
         },
         {
             id: 2,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
+            title:"Helping other",
+            description:"this is description",
+            date:"2030/04/02",
+            organizer:"mekedonia"
         },
         {
             id: 3,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
+            title:"Helping other",
+            description:"this is description",
+            date:"2030/04/02",
+            organizer:"mekedonia"
         },
         {
             id: 4,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
+            title:"Helping other",
+            description:"this is description",
+            date:"2030/04/02",
+            organizer:"mekedonia"
         },
         {
             id: 5,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
+            title:"Helping other",
+            description:"this is description",
+            date:"2030/04/02",
+            organizer:"mekedonia"
         },
         {
             id: 6,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
+            title:"Helping other",
+            description:"this is description",
+            date:"2030/04/02",
+            organizer:"mekedonia"
         },
         {
             id: 7,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
+            title:"Helping other",
+            description:"this is description",
+            date:"2030/04/02",
+            organizer:"mekedonia"
         },
         {
             id: 8,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
+            title:"Helping other",
+            description:"this is description",
+            date:"2030/04/02",
+            organizer:"mekedonia"
         },
         {
             id: 9,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
+            title:"Helping other",
+            description:"this is description",
+            date:"2030/04/02",
+            organizer:"mekedonia"
         },
         {
             id: 10,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
+            title:"Helping other",
+            description:"this is description",
+            date:"2030/04/02",
+            organizer:"mekedonia"
         },
         {
             id: 11,
-            userName: "John Doe",
-            email: "email@address.org",
-            countDonations: "$100",
-            totalDonations: "$500",
-            phone: "0958987458",
-            status: "Active",
-            address: "Bole, Addis Ababa",
-            createdAt: "12-05-2022"
+            title:"Helping other",
+            description:"this is description",
+            date:"2030/04/02",
+            organizer:"mekedonia"
         }
     ]
 
     const columns = [
         {
-            key: "userName",
-            title: "User Name",
-            dataIndex: "userName"
+            key: "title",
+            title: "Title",
+            dataIndex: "title"
         },
         {
-            key: "email",
-            title: "Email",
-            dataIndex: "email"
+            key: "description",
+            title: "Description",
+            dataIndex: "description"
         },
         {
-            key: "countDonations",
-            title: "Count Donations",
-            dataIndex: "countDonations"
+            key: "date",
+            title: "Date",
+            dataIndex: "date"
         },
         {
-            key: "totalDonations",
-            title: "Total Donations",
-            dataIndex: "totalDonations"
+            key: "organizer",
+            title: "Organizer",
+            dataIndex: "organizer"
         },
-        {
-            key: "phone",
-            title: "Phone",
-            dataIndex: "phone"
-        },
-        {
-            key: "status",
-            title: "Status",
-            dataIndex: "status",
-            render: (status) => (
-                <div className='flex'>
-                    <p className='text-green-600'>{status}</p>
-                </div>
-            )
-        },
-        {
-            key: "address",
-            title: "Address",
-            dataIndex: "address"
-        },
-        {
-            key: "createdAt",
-            title: "Cteated At",
-            dataIndex: "createdAt"
-        },
+       
     ]
 
     return (
@@ -180,7 +114,7 @@ export const EventDataTable = () => {
 
 
             <div className='mt-8'>
-                <Table dataSource={usersData} columns={columns} pagination={true} rowKey="id" />
+                <Table dataSource={eventsData} columns={columns} pagination={true} rowKey="id" />
             </div>
 
         </div>
