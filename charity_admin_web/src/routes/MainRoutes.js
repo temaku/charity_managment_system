@@ -8,7 +8,8 @@ import {
   User,
   Event,
   Task,
-  FundDonation
+  FundDonation,
+  Report
 } from "../components";
 
 import { Routes, Route } from "react-router-dom";
@@ -62,6 +63,7 @@ export const MainRoutes = () => {
         <Route path="/fundraiseDonations" element={<FundDonation />} />
        
         <Route path="/donation" element={<Donation />} />
+        <Route path="/reports" element={<Report />} />
         <Route path="/fundraising" element={<Fundraise />} />
       
 
