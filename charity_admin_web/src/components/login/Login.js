@@ -83,12 +83,12 @@ export const Login = () => {
                 className=""
               >
                 <Form.Item
-                  label="userName"
+                  label="Username"
                   name="username"
                   rules={[
                     {
                       required: true,
-                      message: "Please input your userName!",
+                      message: "Please input your Username!",
                     },
                   ]}
                 >

@@ -7,6 +7,7 @@ import { fundraiseApi } from '../services/fundraise/fundraise.service'
 import { usersApi } from '../services/user/user.service'
 import { donationApi } from '../services/donation/donation_service'
 import {eventApi} from '../services/events/events_service'
+import {fundDonationApi} from '../services/fundraise_donation/fundraisedonateService'
 
 export const store = configureStore({
     reducer: {
@@ -16,13 +17,15 @@ export const store = configureStore({
         [fundraiseApi.reducerPath]: fundraiseApi.reducer,
         [donationApi.reducerPath]:donationApi.reducer,
         [eventApi.reducerPath]:eventApi.reducer,
+        [fundDonationApi.reducerPath]:fundDonationApi.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([
         usersApi.middleware,
         charityApi.middleware,
         fundraiseApi.middleware,
         donationApi.middleware,
-        eventApi.middleware
+        eventApi.middleware,
+        fundDonationApi.middleware
     ])
 })
 

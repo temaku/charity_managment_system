@@ -80,8 +80,8 @@ export const Home = (props) => {
                             Fundraising
                         </NavLink>
                     </Menu.Item>
-                    <Menu.Item key="/funddonations" icon={<AiOutlineSetting />}>
-                        <NavLink to="/fundonations" className='nav-text'>
+                    <Menu.Item key="/fundraiseDonations" icon={<AiOutlineSetting />}>
+                        <NavLink to="/fundraiseDonations" className='nav-text'>
                             FundraiseDonations
                         </NavLink>
                     </Menu.Item>

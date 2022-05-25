@@ -7,7 +7,8 @@ import {
   Login,
   User,
   Event,
-  Task
+  Task,
+  FundDonation
 } from "../components";
 
 import { Routes, Route } from "react-router-dom";
@@ -58,10 +59,11 @@ export const MainRoutes = () => {
           <Route path="add-task" element={<AddTask />}/>
         </Route>
 
-        
+        <Route path="/fundraiseDonations" element={<FundDonation />} />
        
         <Route path="/donation" element={<Donation />} />
         <Route path="/fundraising" element={<Fundraise />} />
+      
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>

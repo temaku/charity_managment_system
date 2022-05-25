@@ -32,7 +32,7 @@ export const UserDataTable = () => {
             dataIndex: "active",
             render:(active) => (
                 <div className='flex'>
-                    <p className='text-green-600'>active</p>
+                    <p className='text-green-600'>Active</p>
                 </div>
             )
             
