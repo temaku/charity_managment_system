@@ -10,7 +10,8 @@ import {
   Task,
   FundDonation,
   Report,
-  RegisterEvent
+  RegisterEvent,
+  Budget
 } from "../components";
 
 import { Routes, Route } from "react-router-dom";
@@ -27,6 +28,8 @@ import AddFundraise from "../components/fundraising/addFundraise"
 import  FundraiseIndexPage from "../components/fundraising/fundraiselayout"
 import TaskIndexPage from "../components/tasks/tasklayout"
 import AddTask from "../components/tasks/AddTaskForm";
+import AddBudget from "../components/budgetAllocation/addBudget";
+import BudgetIndexPage from "../components/budgetAllocation/budgetlayout";
 
 
 
@@ -59,6 +62,11 @@ export const MainRoutes = () => {
         <Route path="/tasks" element={<TaskIndexPage />}>
           <Route index element={<Task />}></Route>
           <Route path="add-task" element={<AddTask />}/>
+        </Route>
+
+        <Route path="/budgetAllocate" element={<BudgetIndexPage />}>
+          <Route index element={<Budget />}></Route>
+          <Route path="add-budget" element={<AddBudget />}/>
         </Route>
 
         <Route path="/fundraiseDonations" element={<FundDonation />} />
