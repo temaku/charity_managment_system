@@ -9,7 +9,8 @@ import {
   Event,
   Task,
   FundDonation,
-  Report
+  Report,
+  RegisterEvent
 } from "../components";
 
 import { Routes, Route } from "react-router-dom";
@@ -64,6 +65,7 @@ export const MainRoutes = () => {
        
         <Route path="/donation" element={<Donation />} />
         <Route path="/reports" element={<Report />} />
+        <Route path="/registerEvents" element={<RegisterEvent />} />
         <Route path="/fundraising" element={<Fundraise />} />
       
 

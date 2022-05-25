@@ -10,6 +10,7 @@ import {eventApi} from '../services/events/events_service'
 import {fundDonationApi} from '../services/fundraise_donation/fundraisedonateService'
 import { taskApi } from '../services/task/task_service'
 import { reportApi } from '../services/reports/report_service'
+import { registerEventApi } from '../services/register_event/register_event_service'
 
 export const store = configureStore({
     reducer: {
@@ -21,7 +22,8 @@ export const store = configureStore({
         [eventApi.reducerPath]:eventApi.reducer,
         [fundDonationApi.reducerPath]:fundDonationApi.reducer,
         [taskApi.reducerPath]:taskApi.reducer,
-        [reportApi.reducerPath]:reportApi.reducer
+        [reportApi.reducerPath]:reportApi.reducer,
+        [registerEventApi.reducerPath]:registerEventApi.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([
         usersApi.middleware,
@@ -31,7 +33,8 @@ export const store = configureStore({
         eventApi.middleware,
         fundDonationApi.middleware,
         taskApi.middleware,
-        reportApi.middleware
+        reportApi.middleware,
+        registerEventApi.middleware
 
     ])
 })
