@@ -9,11 +9,7 @@ export const FundraiseDataTable = () => {
     
 
     const columns = [
-        {
-            key: "_id",
-            title: "Fundraise Id",
-            dataIndex: "_id"
-        },
+      
         {
             key: "title",
             title: "Title",

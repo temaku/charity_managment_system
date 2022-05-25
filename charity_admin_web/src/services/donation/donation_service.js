@@ -22,7 +22,7 @@ export const donationApi = createApi({
     endpoints: (builder) => ({
         getAllDonations: builder.query({
             query: () => '/v1/donations',
-            providesTags: (result) => providesTagsHelper(result, tagType, "Donation"),
+            providesTags: (result) => providesTagsHelper(result, tagType, "DONATION"),
         }),
        
         // addCharity: builder.mutation({
@@ -40,7 +40,7 @@ export const donationApi = createApi({
 
 
 export const { 
-    useGetAlDonationsQuery
+    useGetAllDonationsQuery
   
 } = donationApi
 
