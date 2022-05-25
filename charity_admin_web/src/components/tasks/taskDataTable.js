@@ -1,105 +1,16 @@
 import { Table } from 'antd'
 import React from 'react'
+import { useGetAllTasksQuery } from '../../services/task/task_service'
 
 export const TaskDataTable = () => {
+    const { data, isError, isFetching, isLoading, isSuccess, error } =  useGetAllTasksQuery();
+    const allTasks = data?.data
+    console.log("allTasks: ", allTasks)
 
-    const usersData = [
-        {
-            id: 1,
-            volunteer:"selam",
-            description:"helping the others",
-            task:"aged group",
-            status:"pending",
-            assignedAt: "12-05-2022"
-        },
-        {
-            id: 2,
-            volunteer:"selam",
-            description:"helping the others",
-            task:"aged group",
-            status:"pending",
-            assignedAt: "12-05-2022"
-        },
-        {
-            id: 3,
-            volunteer:"selam",
-            description:"helping the others",
-            task:"aged group",
-            status:"pending",
-            assignedAt: "12-05-2022"
-        },
-        {
-            id: 4,
-            volunteer:"selam",
-            description:"helping the others",
-            task:"aged group",
-            status:"pending",
-            assignedAt: "12-05-2022"
-        },
-        {
-            id: 5,
-            volunteer:"selam",
-            description:"helping the others",
-            task:"aged group",
-            status:"pending",
-            assignedAt: "12-05-2022"
-        },
-        {
-            id: 6,
-            volunteer:"selam",
-            description:"helping the others",
-            task:"aged group",
-            status:"pending",
-            assignedAt: "12-05-2022"
-        },
-        {
-            id: 7,
-            volunteer:"selam",
-            description:"helping the others",
-            task:"aged group",
-            status:"pending",
-            assignedAt: "12-05-2022"
-        },
-        {
-            id: 8,
-            volunteer:"selam",
-            description:"helping the others",
-            task:"aged group",
-            status:"pending",
-            assignedAt: "12-05-2022"
-        },
-        {
-            id: 9,
-            volunteer:"selam",
-            description:"helping the others",
-            task:"aged group",
-            status:"pending",
-            assignedAt: "12-05-2022"
-        },
-        {
-            id: 10,
-            volunteer:"selam",
-            description:"helping the others",
-            task:"aged group",
-            status:"pending",
-            assignedAt: "12-05-2022"
-        },
-        {
-            id: 11,
-            volunteer:"selam",
-            description:"helping the others",
-            task:"aged group",
-            status:"pending",
-            assignedAt: "12-05-2022"
-        }
-    ]
+    
 
     const columns = [
-        {
-            key: "volunteer",
-            title: "Volunteer",
-            dataIndex: "volunteer"
-        },
+       
         {
             key: "task",
             title: "Task",
@@ -123,14 +34,31 @@ export const TaskDataTable = () => {
         
     ]
 
-  return (
+   return (
     <div className='flex flex-col'>
 
-            
-            <div className='mt-8'>
-                <Table dataSource={usersData} columns={columns} pagination={true} rowKey="id" />
+        {
+            isError &&
+            <div className='flex mt-3'>
+                <p className='text-red-500 text-md font-bold mx-3'>
+                    {error?.name || error?.status}
+                </p>
+                <p className='text-red-500 text-md font-bold'>
+                    {error?.message || error?.data.message}
+                </p>
             </div>
+        }
 
+        <div className='mt-8'>
+            <Table 
+            dataSource={allTasks} 
+            columns={columns} 
+            pagination={true} 
+            loading={isLoading}
+            rowKey="id" />
         </div>
-  )
+
+    </div>
+)
+
 }
