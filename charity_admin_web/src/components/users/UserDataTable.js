@@ -18,7 +18,7 @@ export const UserDataTable = () => {
     const columns = [
         {
             key: "userName",
-            title: "User Name",
+            title: "Username",
             dataIndex: "username"
         },
         {
@@ -27,10 +27,27 @@ export const UserDataTable = () => {
             dataIndex: "email"
         },
         {
+            key: "active",
+            title: "Status",
+            dataIndex: "active",
+            render:(active) => (
+                <div className='flex'>
+                    <p className='text-green-600'>active</p>
+                </div>
+            )
+            
+        },
+        {
             key: "noOfDonation",
-            title: "No of Donation",
+            title: "Donation",
             dataIndex: "noOfDonation"
         },
+        {
+            key: "totalDonations",
+            title: "Total",
+            dataIndex: "totalDonations"
+        },
+       
         {
             key: "phone",
             title: "Phone",
@@ -47,18 +64,8 @@ export const UserDataTable = () => {
             title: "Role",
             dataIndex: "role"
         },
-        {
-            key: "status",
-            title: "Status",
-            dataIndex: "status",
-            render: (status) => (
-                <div>
-                    {
-                        status ? "ACTIVE" : "INACTIVE"
-                    }
-                </div>
-            )
-        },
+        
+      
     ]
 
 

@@ -11,32 +11,21 @@ export const CharityDataTable = () => {
 
     const columns = [
 
-          {
-            key: "_id",
-            title: "Charity Id",
-            dataIndex: "_id"
-        },
         {
             key: "name",
             title: "Name",
             dataIndex: "name"
-        },
-      
-        {
-            key: "category",
-            title: "Category",
-            dataIndex: "category"
         },
         {
             key: "email",
             title: "Email",
             dataIndex: "email"
         },
-        // {
-        //     key: "address",
-        //     title: "Address",
-        //     dataIndex: "address"
-        // },
+        {
+            key: "address",
+            title: "Address",
+            dataIndex: "address"
+        },
         {
             key: "phone",
             title: "Phone",
@@ -44,19 +33,19 @@ export const CharityDataTable = () => {
         },
         {
             key: "NumOfDonors",
-            title: "NumOfDonation",
+            title: "Donation",
             dataIndex: "NumOfDonors"
         },
         {
             key: "SumofDonations",
-            title: "SumOfDonation",
+            title: "Total",
             dataIndex: "SumofDonations"
         },
-        // {
-        //     key: "createdAt",
-        //     title: "Created At",
-        //     dataIndex: "createdAt"
-        // },
+        {
+            key: "createdAt",
+            title: "Created At",
+            dataIndex: "createdAt"
+        },
     ]
 
     return (
