@@ -1,1 +1,0 @@
-export {Charity} from './Charity'
