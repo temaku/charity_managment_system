@@ -10,7 +10,7 @@ post(
      registerEventController.setEventRegisterIds,
     registerEventController.createRegisterEvent)
 
-router.use(adminController.protect,adminController.restrictTo("admin"));
+//router.use(adminController.protect,adminController.restrictTo("admin"));
 
 router.route('/').get(registerEventController.getAllUserRegisteredEvent);
 

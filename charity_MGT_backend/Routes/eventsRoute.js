@@ -9,7 +9,7 @@ router.use('/:eventId/register',eventRegisterRoute);
 // router.use(adminController.protect,adminController.restrictTo("admin"));
 
 router.route('/').
-post(eventController.createEvent).
+post(adminController.protect,adminController.restrictTo("admin"),eventController.createEvent).
 get(eventController.getEvents);
 
 router.route('/:id').
