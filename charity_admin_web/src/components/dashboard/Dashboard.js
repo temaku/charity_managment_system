@@ -14,7 +14,7 @@ export const Dashboard = () => {
                     <div className="bg-white w-full rounded-xl shadow-lg flex items-center justify-around">
                         <img src="https://i.imgur.com/VHc5SJE.png" alt="" />
                         <div className="text-center">
-                            <h1 className="text-4xl font-bold text-gray-800">534</h1>
+                            <h1 className="text-4xl font-bold text-gray-800">40</h1>
                             <span className="text-gray-500">Users</span>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ export const Dashboard = () => {
                             alt=""
                         />
                         <div className="text-center">
-                            <h1 className="text-4xl font-bold text-gray-800">9.7k</h1>
+                            <h1 className="text-4xl font-bold text-gray-800">2.5k</h1>
                             <span className="text-gray-500">Donations</span>
                         </div>
                     </div>

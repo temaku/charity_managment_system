@@ -25,14 +25,21 @@ export const donationApi = createApi({
             providesTags: (result) => providesTagsHelper(result, tagType, "DONATION"),
         }),
        
-        // addCharity: builder.mutation({
-        //     query: body => ({
-        //         url: '/v1/charities',
-        //         method: 'POST',
-        //         body
-        //     }),
-        //     invalidatesTags: [{ type: tagType }],
-        // }),
+        updateDonation: builder.mutation({
+            query: body => ({
+                url: `/v1/donations/${body.id}`,
+                method: 'PATCH',
+                body
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
+        deleteDonation: builder.mutation({
+            query: ({donationId}) => ({
+                url: `/v1/donations/${donationId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
         
     })
 
@@ -40,8 +47,9 @@ export const donationApi = createApi({
 
 
 export const { 
-    useGetAllDonationsQuery
-  
+    useGetAllDonationsQuery,
+    useUpdateDonationMutation,
+    useDeleteDonationMutation
 } = donationApi
 
 

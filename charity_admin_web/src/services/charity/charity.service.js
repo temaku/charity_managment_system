@@ -33,7 +33,21 @@ export const charityApi = createApi({
             }),
             invalidatesTags: [{ type: tagType }],
         }),
-        
+        updateCharity: builder.mutation({
+            query: body => ({
+                url: `/v1/charities/${body.id}`,
+                method: 'PATCH',
+                body
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
+        deleteCharity: builder.mutation({
+            query: ({charityId}) => ({
+                url: `/v1/charities/${charityId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
     })
 
 })
@@ -42,6 +56,8 @@ export const charityApi = createApi({
 export const { 
     useGetAllCharitiesQuery, 
     useAddCharityMutation,
+    useUpdateCharityMutation,
+    useDeleteCharityMutation
 } = charityApi
 
 

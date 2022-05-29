@@ -69,7 +69,7 @@ export const MainRoutes = () => {
           <Route path="add-budget" element={<AddBudget />}/>
         </Route>
 
-        <Route path="/fundraiseDonations" element={<FundDonation />} />
+        <Route path="/fundonations" element={<FundDonation />} />
        
         <Route path="/donation" element={<Donation />} />
         <Route path="/reports" element={<Report />} />

@@ -2,6 +2,8 @@ import { Table } from 'antd'
 import React from 'react'
 import { useGetAllEventsQuery} from '../../services/events/events_service'
 
+import moment from 'moment'
+
 export const EventDataTable = () => {
     
     const { data, isError, isFetching, isLoading, isSuccess, error } =  useGetAllEventsQuery();
@@ -23,13 +25,30 @@ export const EventDataTable = () => {
         {
             key: "date",
             title: "Date",
-            dataIndex: "date"
+            dataIndex: "date",
+            render: (date) => (
+                <>
+                {
+                    moment(date).format("L")
+                }
+                </>
+            )
         },
+        // {
+        //     key: "organizer",
+        //     title: "Organizer",
+        //     dataIndex: "organizer"
+        // },
         {
-            key: "organizer",
-            title: "Organizer",
-            dataIndex: "organizer"
-        },
+            key: "_id",
+            title: "Action",
+            render: () => (
+                <div className='flex items-center justify-center'>
+                    <p>Edit</p>
+                    <p className='mx-3'>Delete</p>
+                </div>
+            )
+        }
        
     ]
 
