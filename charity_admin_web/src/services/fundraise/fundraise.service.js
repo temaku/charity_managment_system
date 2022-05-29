@@ -33,6 +33,22 @@ export const fundraiseApi = createApi({
             }),
             invalidatesTags: [{ type: tagType }],
         }),
+
+        updateFundraise: builder.mutation({
+            query: body => ({
+                url: `/v1/fundraises/${body.id}`,
+                method: 'PATCH',
+                body
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
+        deleteFundraise: builder.mutation({
+            query: ({fundraiseId}) => ({
+                url: `/v1/fundraises/${fundraiseId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
         
     })
 
@@ -42,6 +58,8 @@ export const fundraiseApi = createApi({
 export const { 
     useGetAllFundraisessQuery, 
     useAddFundraiseMutation,
+    useUpdateFundraiseMutation,
+    useDeleteFundraiseMutation
 } = fundraiseApi
 
 

@@ -2,6 +2,10 @@ import { Table } from 'antd'
 import React from 'react'
 import { useGetAllTasksQuery } from '../../services/task/task_service'
 
+import moment from 'moment'
+
+import {AiFillEdit, AiFillDelete} from 'react-icons/ai'
+
 export const TaskDataTable = () => {
     const { data, isError, isFetching, isLoading, isSuccess, error } =  useGetAllTasksQuery();
     const allTasks = data?.data
@@ -26,11 +30,29 @@ export const TaskDataTable = () => {
             title: "Description",
             dataIndex: "description"
         },
+    
         {
             key: "assignedAt",
-            title: "AssignAt",
-            dataIndex: "assignedAt"
+            title: "Assign At",
+            dataIndex: "AssignAt",
+            render: (createdAt) => (
+                <>
+                {
+                    moment(createdAt).format("L")
+                }
+                </>
+            )
         },
+        {
+            key: "_id",
+            title: "Action",
+            render: () => (
+                <div className='flex items-center justify-center'>
+                   <AiFillEdit className='mx-3 w-5 h-5' />
+                   <AiFillDelete  className='mx-2 text-red-800 w-4 h-4'/>
+                </div>
+            )
+        }
         
     ]
 

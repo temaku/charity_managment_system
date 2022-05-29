@@ -1,11 +1,102 @@
-import { Table } from 'antd'
-import React from 'react'
-import {  useGetAllDonationsQuery } from '../../services/donation/donation_service'
+import React, { useState, useEffect } from 'react'
+import { Form, Table, Input, Button, Spin, Select } from 'antd'
+import { useDeleteDonationMutation, useGetAllDonationsQuery, useUpdateDonationMutation } from '../../services/donation/donation_service'
+
+
+import moment from 'moment'
+
+import { AiFillEdit, AiFillDelete } from 'react-icons/ai'
+import EditModal from '../modals/EditModal'
+import { useUpdateCharityMutation } from '../../services/charity/charity.service'
+import { toast, ToastContainer } from 'react-toastify'
+import DeleteModal from '../modals/DeleteModal'
+
 export const DonationDataTable = () => {
-    const { data, isError, isFetching, isLoading, isSuccess, error } =   useGetAllDonationsQuery();
+
+    const { data, isError, isFetching, isLoading, isSuccess, error } = useGetAllDonationsQuery();
     const allDonations = data?.data
-    console.log("allDonations : ", allDonations )
-   
+
+    const [updateDonation, { data: updateData, isError: isUpdateError, isLoading: isUpdateLoading, isSuccess: isUpdateSUccess, error: updateError }] = useUpdateDonationMutation()
+    const [deleteDonation, { data: deleteData, isError: isDeleteError, isLoading: isDeleteLoading, isSuccess: isDeleteSUccess, error: deleteError }] = useDeleteDonationMutation()
+
+
+
+
+    const [editModalVisible, setEditModalVisible] = useState(false)
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false)
+
+    const [loading, setLoading] = useState(false)
+    const [donationData, setDonationData] = useState({})
+    const [donationId, setDonationId] = useState('')
+
+
+
+    const [form] = Form.useForm()
+
+    const { Option } = Select;
+
+
+
+    useEffect(() => {
+        if (isUpdateSUccess && updateData) {
+            toast.success("Donation updated succesfuuly!")
+            setEditModalVisible(false)
+        }
+    }, [isUpdateSUccess])
+
+
+    useEffect(() => {
+        if (isDeleteSUccess && deleteData) {
+            toast.success("Donation Deleted succesfuuly!")
+            setDeleteModalVisible(false)
+        }
+    }, [isDeleteSUccess])
+
+
+    // set modals visible
+    const showEditModal = (record) => {
+        console.log("Data yetekebelnew: ", record)
+        setEditModalVisible(true)
+        setDonationData(record)
+    }
+
+    const cancelEditModal = () => {
+        setEditModalVisible(false)
+    }
+
+
+    const showDeleteModal = (record) => {
+        setDeleteModalVisible(true)
+        const id = record._id
+        setDonationId(id)
+    }
+
+    const cancelDeleteModal = () => {
+        setDeleteModalVisible(false)
+    }
+
+
+    // handle submit 
+
+    const handleUpdateDonation = (values) => {
+        const id = donationData._id
+        const body = {
+            ...values,
+            id
+        }
+        updateDonation(body)
+    }
+
+    const handleUpdateDonationFailed = (errors) => {
+        console.log("errors: ", errors)
+    }
+
+
+    const confirmDeleteDonation = () => {
+        deleteDonation({ donationId })
+    }
+
+
 
     const columns = [
         {
@@ -21,24 +112,70 @@ export const DonationDataTable = () => {
         {
             key: "status",
             title: "Status",
-            dataIndex: "status"
+            dataIndex: "status",
+            render: (status) => (
+                <div className='uppercase'>
+                    {
+                        status === 'pending' ? (
+                            <span className='text-red-600'>
+                                {
+                                    status
+                                }
+                            </span>
+                        ): 
+                        (
+                            <span className='text-green-800'>
+                                {
+                                    status
+                                }
+                            </span>
+                        )
+
+                    }
+                </div>
+            )
         },
         {
             key: "donate",
             title: "Amount",
             dataIndex: "donate"
         },
-       
+
         {
             key: "donatedAt",
             title: "donated At",
-            dataIndex: "donatedAt"
+            dataIndex: "donatedAt",
+            render: (createdAt) => (
+                <>
+                    {
+                        moment(createdAt).format("L")
+                    }
+                </>
+            )
         },
-       
+        {
+            key: "_id",
+            title: "Action",
+            render: (text, record) => (
+                <div className='flex items-center justify-center'>
+                    <AiFillEdit
+                        className='mx-3 w-5 h-5 cursor-pointer'
+                        onClick={() => showEditModal(record)}
+                    />
+                    <AiFillDelete
+                        className='mx-2 text-red-800 w-4 h-4 cursor-pointer'
+                        onClick={() => showDeleteModal(record)}
+                    />
+                </div>
+            )
+        }
+
     ]
 
     return (
         <div className='flex flex-col'>
+
+            <ToastContainer />
 
             {
                 isError &&
@@ -52,13 +189,106 @@ export const DonationDataTable = () => {
                 </div>
             }
 
+
+            {/* show modals */}
+
+
+            {/* first edit modal */}
+            {
+                editModalVisible &&
+                <EditModal
+                    visible={editModalVisible}
+                    title="Edit Donation"
+                    handleOk={form.submit}
+                    loading={isUpdateLoading}
+                    handleCancel={cancelEditModal}
+                >
+
+
+                    {
+                        isUpdateError &&
+                        <div className='flex mt-3'>
+                            <p className='text-red-500 text-md font-bold mx-3'>
+                                {updateError?.name || updateError?.status}
+                            </p>
+                            <p className='text-red-500 text-md font-bold'>
+                                {updateError?.message || updateError?.data.message}
+                            </p>
+                        </div>
+                    }
+
+
+
+                    <Form
+                        form={form}
+                        initialValues={{
+                            status: donationData?.status
+                        }}
+                        onFinish={handleUpdateDonation}
+                        onFinishFailed={handleUpdateDonationFailed}
+                        autoComplete="off"
+                        layout="vertical"
+                        className=""
+                    >
+                        <Form.Item
+                            label="Status"
+                            name="status"
+
+                        >
+
+                            <Select
+                                placeholder="Select status"
+                                allowClear >
+                                <Option value="pending">PENDING</Option>
+                                <Option value="rejected">REJECTED</Option>
+                                <Option value="accepted">ACCEPTED</Option>
+                            </Select>
+
+                        </Form.Item>
+
+                    </Form>
+
+                </EditModal>
+            }
+
+            {/* Delete Modal */}
+
+            {
+                deleteModalVisible &&
+                <DeleteModal
+                    visible={deleteModalVisible}
+                    title="Delete Donation"
+                    handleOk={confirmDeleteDonation}
+                    loading={isDeleteLoading}
+                    handleCancel={cancelDeleteModal}
+                >
+
+                    {
+                        isDeleteError &&
+                        <div className='flex mt-3'>
+                            <p className='text-red-500 text-md font-bold mx-3'>
+                                {deleteError?.name || deleteError?.status}
+                            </p>
+                            <p className='text-red-500 text-md font-bold'>
+                                {deleteError?.message || deleteError?.data.message}
+                            </p>
+                        </div>
+                    }
+
+                    <div>
+                        DO you want to delete this donation
+                    </div>
+                </DeleteModal>
+            }
+
+
             <div className='mt-8'>
-                <Table 
-                dataSource={allDonations} 
-                columns={columns} 
-                pagination={true} 
-                loading={isLoading}
-                rowKey="id" />
+                <Table
+                    dataSource={allDonations}
+                    columns={columns}
+                    pagination={true}
+                    loading={isLoading}
+                    rowKey="id" />
             </div>
 
         </div>
