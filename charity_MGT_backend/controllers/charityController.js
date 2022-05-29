@@ -31,13 +31,13 @@ exports.resizeCharityPhoto = catchAsync(async (req,res,next)=>{
 
   next();
 })
-const filterObj = (obj,...allowedFields)=>{
+const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
-  Object.keys(obj).forEach(el=>{
-      if(allowedFields.includes(el)) newObj[el] = obj[el];
-  })
+  Object.keys(obj).forEach(el => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
+  });
   return newObj;
-}
+};
 
 
 exports.createCharity = catchAsync(
@@ -76,12 +76,13 @@ exports.getAllCharity = catchAsync(async (req,res,next)=>{
     })
   })
 exports.updateCharity =catchAsync(async (req,res,next)=>{
-  const filteredBody = filterObj(req.body,'email')
-   console.log("update");
+ const filteredBody = filterObj(req.body,'name','description','email','address','phone')
+ 
   if(req.file){
     filteredBody.image = req.file.filename;
   }
-  console.log(filteredBody.image);
+
+ 
   const charity = await Charity.findByIdAndUpdate(req.params.id,filteredBody,{
     new:true,
     runValidators:true
@@ -101,8 +102,8 @@ exports.deleteCharity = catchAsync( async (req,res,next)=>{
    if(!charity){
      return next(new AppError('There is no charity with the id',404))
    }
-   res.status(204).json({
+   res.status(200).json({
      status:'success',
-     data:null
+     message:"charity with the Id is deleted successfully"
    })
 })

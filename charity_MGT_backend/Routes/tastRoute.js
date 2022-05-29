@@ -3,7 +3,7 @@ const router = express.Router();
 const taskController = require('../controllers/taskController');
 const adminController = require('../controllers/adminController');
 
-router.use(adminController.protect,adminController.restrictTo("admin"));
+// router.use(adminController.protect,adminController.restrictTo("admin"));
 router.route('/').
 post(taskController.createTask).
 get(taskController.getAllTasks)
