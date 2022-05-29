@@ -17,6 +17,8 @@ const taskRoute = require('./Routes/tastRoute');
 const reportRoute = require('./Routes/reportRoute');
 const registerEvent = require('./Routes/eventRegisterRoute');
 const adminRoute = require('./Routes/adminRoute');
+const budgetRoute = require('./Routes/budgetRoute');
+
 const errorHandler = require('./middleware/errhandler');
 app.use(morgan('dev'));
 app.use(express.json())
@@ -33,9 +35,19 @@ app.use(cors());
 app.options('*', cors());
 app.use(express.static(__dirname+"/public/uploads"))
 
+app.get('/api', (req, res) => {
+    res.status(200).send('welcome to charity management system!')
+})
+
+// auth route
 app.use('/api/v1/auth',authRoutes);
+// admin route
 app.use('/api/v1/admin',adminRoute);
+
+// category route
 app.use('/api/v1/categories',categoryRoutes);
+
+// charity route
 app.use('/api/v1/charities',charityRoute);
 app.use('/api/v1/donations',donationRoute);
 app.use('/api/v1/fundraises',fundraiseRoute);
@@ -44,6 +56,8 @@ app.use('/api/v1/tasks',taskRoute);
 app.use('/api/v1/reports',reportRoute);
 app.use('/api/v1/events',eventsRoute);
 app.use('/api/v1/register',registerEvent);
+app.use('/api/v1/budget',budgetRoute);
+
 
 app.use('/api/v1/users',userRoute);
 
