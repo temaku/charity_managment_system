@@ -80,6 +80,36 @@ export const Home = (props) => {
                             Fundraising
                         </NavLink>
                     </Menu.Item>
+                    <Menu.Item key="/fundraiseDonations" icon={<AiOutlineSetting />}>
+                        <NavLink to="/fundraiseDonations" className='nav-text'>
+                            FundraiseDonations
+                        </NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="/tasks" icon={<AiOutlineSetting />}>
+                        <NavLink to="/tasks" className='nav-text'>
+                            Tasks
+                        </NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="/reports" icon={<AiOutlineSetting />}>
+                        <NavLink to="/reports" className='nav-text'>
+                            Reports
+                        </NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="/registerEvent" icon={<AiOutlineSetting />}>
+                        <NavLink to="/registerEvents" className='nav-text'>
+                            RegisterEvent
+                        </NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="/budgetAllocate" icon={<AiOutlineSetting />}>
+                        <NavLink to="/budgetAllocate" className='nav-text'>
+                            Budget Allocation
+                        </NavLink>
+                    </Menu.Item>
+                    {/* <Menu.Item key="/generateReport" icon={<AiOutlineSetting />}>
+                        <NavLink to="/generateReport" className='nav-text'>
+                            GenerateReport Report
+                        </NavLink>
+                    </Menu.Item> */}
                     </Menu>
                     <div className='absolute bottom-4 left-0 w-full h-20'>
                         <span className=' flex items-center ml-4 mt-2 cursor-pointer' onClick={() => onLogout()}>
@@ -91,7 +121,7 @@ export const Home = (props) => {
 
                 <Layout className="site-layout" >
                     <Content
-                        className="site-layout-background mt-10 py-2 w-full body_content"
+                        className="site-layout-background my-10 py-10 w-full body_content"
                     >
                         {props.children}
                     </Content>

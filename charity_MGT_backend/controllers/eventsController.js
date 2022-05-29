@@ -1,8 +1,42 @@
 const Event = require('../models/eventsModel');
 const catchAsync = require('../middleware/catchAysnc');
 const AppError = require('../middleware/catchAysnc')
+const sharp = require('sharp');
+const multer = require('multer');
 
 
+const multerStorage = multer.memoryStorage();
+const multerFilter = (req,file,cb)=>{
+    if(file.mimetype.startsWith('image')){
+        cb(null,true)
+    }else{
+        cb(new AppError('Not an image! Please upload only images.',400),false)
+    }
+}
+const upload = multer({
+  storage:multerStorage,
+  fileFilter:multerFilter
+})
+exports.uploadEventPhoto = upload.single('photo');
+exports.resizeEventPhoto = catchAsync(async (req,res,next)=>{
+  if(!req.file) return next();
+  req.file.filename = `events-${Date.now()}.jpeg`;
+
+  await sharp(req.file.buffer)
+  .resize(500,500)
+  .toFormat('jpeg')
+  .jpeg({ quality:90 })
+  .toFile(`./public/uploads/events/${req.file.filename}`);
+
+  next();
+})
+const filterObj = (obj,...allowedFields)=>{
+    const newObj = {};
+    Object.keys(obj).forEach(el=>{
+        if(allowedFields.includes(el)) newObj[el] = obj[el];
+    })
+    return newObj;
+  }
 
 exports.createEvent = catchAsync(async (req,res,next)=>{
     const event = await Event.create(req.body);
@@ -34,7 +68,13 @@ exports.getEvent = catchAsync(async (req,res,next)=>{
     })
 })
 exports.updateEvent = catchAsync(async (req,res,next)=>{
-    const event = await Event.findByIdAndUpdate(req.params.id,req.body,{
+    const filteredBody = filterObj(req.body,'title')
+    console.log("update");
+   if(req.file){
+     filteredBody.photo = req.file.filename;
+   }
+   console.log(filteredBody.image);
+    const event = await Event.findByIdAndUpdate(req.params.id,filteredBody,{
         new:true,
         runValidators:true
     })

@@ -8,10 +8,10 @@ const adminController = require('../controllers/adminController');
 
 
 router.use('/:fundId/donate',fundDonateRoute);
-router.use(adminController.protect,adminController.restrictTo("admin"));
+///router.use(adminController.protect,adminController.restrictTo("admin"));
 
 router.route('/').
-post(fundraiseController.createFundraise).
+post(adminController.protect,adminController.restrictTo("admin"),fundraiseController.createFundraise).
 get(fundraiseController.getAllFundraise);
 
 router.route('/:id').

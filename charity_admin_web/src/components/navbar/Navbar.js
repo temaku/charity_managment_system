@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import charityLogo from '../../assets/img/icon.png'
 
-import {  Avatar, Menu, Button, Dropdown } from 'antd'
+import { Avatar, Menu, Button, Dropdown } from 'antd'
 import {
     MenuUnfoldOutlined,
 } from '@ant-design/icons';
@@ -21,22 +21,46 @@ import { FiUsers } from 'react-icons/fi'
 
 import { useLocation, useNavigate, NavLink } from 'react-router-dom';
 
-import {BiHelpCircle} from 'react-icons/bi'
+import { BiHelpCircle } from 'react-icons/bi'
 
 import './navbar.css'
+
+import { logout, reset } from '../../features/authSlice'
+
+import { useSelector, useDispatch } from 'react-redux'
+import { current } from '@reduxjs/toolkit';
+
 
 export const Navbar = () => {
 
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
+    const [adminInfo, setAdminInfo] = useState({})
 
     const params = useLocation()
     const navigate = useNavigate()
-    
+
+    const dispatch = useDispatch()
+
+
+
+    useEffect(() => {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+        if (currentUser) {
+            const admin = currentUser?.admin
+            setAdminInfo(admin)
+        } else {
+            setAdminInfo({})
+        }
+
+    }, [])
+
 
 
     const userLogout = () => {
+        dispatch(logout())
+        dispatch(reset())
         navigate('/login')
     }
 
@@ -114,12 +138,12 @@ export const Navbar = () => {
 
             <Menu.Item key="/change-password" icon={<BiHelpCircle />}>
                 <NavLink to="/change-password" className='nav-text'>
-                    Help Center 
+                    Help Center
                 </NavLink>
             </Menu.Item>
-            <Menu.Item key="/change-password" icon={<AiOutlineSetting />}>
-                <NavLink to="/change-password" className='nav-text'>
-                    Account Settings 
+            <Menu.Item key="/account-setting" icon={<AiOutlineSetting />}>
+                <NavLink to="/account-setting" className='nav-text'>
+                    Account Settings
                 </NavLink>
             </Menu.Item>
         </Menu>
@@ -143,14 +167,15 @@ export const Navbar = () => {
             {/* menu for mobile devices ends */}
 
             <div className='flex items-center justify-center'>
-            <img src={charityLogo} alt='watch dog logo' className='hidden md:block lg:block watch-dog-logo' />
+                <img src={charityLogo} alt='watch dog logo' className='hidden md:block lg:block watch-dog-logo' />
                 <p className='text-xl text-gray-800 font-bold mt-4'>Charity Management</p>
             </div>
 
             <div className='mx-3 py-3 navbar-right'>
 
                 <div className='flex w-1/2 relative h-full md:w-full flex items-center justify-center md:mt-5 mt-5'>
-                    <p className='mx-3 text-md text-gray-800 font-bold'>Temesgen Talo</p>
+                    <p className='mx-3 text-md text-gray-800 font-bold'>{adminInfo?.username}</p>
+
                     <Dropdown overlay={menu} trigger={['click']} placement="bottomCenter" className='navbar-menu'>
                         <p onClick={e => e.preventDefault()}>
                             <Avatar

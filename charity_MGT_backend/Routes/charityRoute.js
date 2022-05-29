@@ -7,10 +7,10 @@ const adminController = require('../controllers/adminController');
 router.use('/:charityId/donations', donationRouter);
 
 router.route('/').post(adminController.protect,adminController.restrictTo("admin"),charityController.createCharity).
-get(adminController.protect,adminController.restrictTo("admin"),charityController.getAllCharity)
+get(charityController.getAllCharity)
 router.route('/:id').
 get(charityController.getCharity).
-patch(adminController.protect,adminController.restrictTo("admin"),charityController.uploadcharityPhoto,charityController.resizeCharityPhoto,charityController.updateCharity).
+patch(charityController.uploadcharityPhoto,charityController.resizeCharityPhoto,charityController.updateCharity).
 delete(adminController.protect,adminController.restrictTo("admin"),charityController.deleteCharity)
 
 
