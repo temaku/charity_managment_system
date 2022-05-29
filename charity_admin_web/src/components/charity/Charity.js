@@ -2,11 +2,10 @@ import { Button } from 'antd'
 import React from 'react'
 import { Home } from '../Home'
 import { CharityDataTable } from './CharityDataTable'
-import { Link } from "react-router-dom";
 
 export const Charity = () => {
     return (
-        
+        <Home>
             <div className='flex flex-col'>
 
                 <div className='flex items-center justify-between flex-wrap-reverse mt-5 bg-gray-200 px-5 py-3'>
@@ -15,11 +14,11 @@ export const Charity = () => {
                     </div>
 
                     <div className='mt-4  md:justify-end'>
-                    <Link to="/charity/add-charity">
-                      <Button type="primary" className="px-7">
-                         Add Charity
-                    </Button>
-                    </Link>
+                        <Button
+                            type='primary'
+                            className='px-7'>
+                            Update Charity
+                        </Button>
                     </div>
 
                 </div>
@@ -28,6 +27,6 @@ export const Charity = () => {
 
             </div>
 
-        
+        </Home>
     )
 }

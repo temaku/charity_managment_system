@@ -42,7 +42,6 @@ const userSchema = new mongoose.Schema({
     type:Number,
     default:0
   },
- 
 
   password: {
     type: String,
@@ -67,7 +66,7 @@ userSchema.virtual('id').get(function () {
   return this._id.toHexString();
 });
 
-userSchema.virtual('donations', {
+userSchema.virtual('donation', {
   ref: 'Donation',
   foreignField: 'donor',
   localField: '_id'

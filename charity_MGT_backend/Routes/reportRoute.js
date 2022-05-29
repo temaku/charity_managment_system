@@ -4,10 +4,10 @@ const reportController = require('../controllers/reportController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 
-
+router.use(authMiddleware.protect,authMiddleware.restrictTo("volunteers"));
 
 router.route('/').
-post(authMiddleware.protect,authMiddleware.restrictTo("volunteers"),reportController.createReport).
+post(reportController.createReport).
 get(reportController.getAllReport)
 
 router.route('/id').

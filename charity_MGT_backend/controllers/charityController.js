@@ -27,7 +27,7 @@ exports.resizeCharityPhoto = catchAsync(async (req,res,next)=>{
   .resize(500,500)
   .toFormat('jpeg')
   .jpeg({ quality:90 })
-  .toFile(`./public/uploads/charity/${req.file.filename}`);
+  .toFile(`./public/uploads/charities/${req.file.filename}`);
 
   next();
 })
@@ -54,7 +54,7 @@ exports.getAllCharity = catchAsync(async (req,res,next)=>{
   if(req.query.categories){
      filter =  {category:req.query.categories}
   }
-    const charities = await Charity.find(filter);
+    const charities = await Charity.find(filter).populate('category');
     if(!charities){
       return next( new AppError('No charity found ',404))
     }

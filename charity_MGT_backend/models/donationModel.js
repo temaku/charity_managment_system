@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const bcrypt = require("bcryptjs");
 const Charity = require('../models/charityModel');
 const User = require('../models/userModel');
-const Budget = require("../models/budgetAllocate");
 const donationSchema = new mongoose.Schema({
     charity:{
         type:mongoose.Schema.Types.ObjectId,
@@ -106,33 +105,6 @@ donationSchema.statics.SumofDonations = async function(charityId){
         })
     }
 }
-donationSchema.statics.BudgetTotalAmout = async function(charityId){
-    const stats = await this.aggregate([
-        {
-            $match:{charity:charityId}
-        },
-        {
-        $group:{
-            _id:'$charity',
-            currentAmount:{$sum:'$donate'}
-
-        }
-    }
-    ])
- 
-    if(stats.length >0){
-        await Budget.findByIdAndUpdate(charityId,{
-        
-            currentAmount:stats[0].currentAmount
-
-        })
-    }else{
-        await Budget.findByIdAndUpdate(charityId,{
-           
-            NumOfDonors:0
-        })
-    }
-}
 donationSchema.post('save', function() {
     // this points to current donation
     this.constructor.SumofDonations(this.charity);
@@ -141,18 +113,18 @@ donationSchema.post('save',function(){
     this.constructor.DonationOfUser(this.donor);
 })
 
-// donationSchema.pre(/^find/, function(next) {
-//         this.populate({
-//             path:'charity',
-//             select:' name description'  
-//         }) 
-//         // }).populate({
-//         //     path:'donor',
-//         //     select:'username photo'
-//         // })
+donationSchema.pre(/^find/, function(next) {
+        this.populate({
+            path:'charity',
+            select:' name description'  
+        }) 
+        // }).populate({
+        //     path:'donor',
+        //     select:'username photo'
+        // })
         
-//         next();
-//     })
+        next();
+    })
 donationSchema.pre('save',async function(next){
    this.password = await bcrypt.hash(this.password,12) 
    next();

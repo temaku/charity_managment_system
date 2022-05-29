@@ -77,7 +77,7 @@ exports.deleteMe = catchAsync(async ( req,res,next)=>{
 
 
 exports.getAllUser = catchAsync( async (req,res,next)=>{
-    const user = await User.find().populate('donations');
+    const user = await User.find();
     if(!user){
         return next(new AppError("There is no users ",404))
     }

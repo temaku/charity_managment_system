@@ -6,15 +6,15 @@ const adminController = require('../controllers/adminController');
 
 router.use('/:eventId/register',eventRegisterRoute);
 
-// router.use(adminController.protect,adminController.restrictTo("admin"));
+router.use(adminController.protect,adminController.restrictTo("admin"));
 
 router.route('/').
-post(adminController.protect,adminController.restrictTo("admin"),eventController.createEvent).
+post(eventController.createEvent).
 get(eventController.getEvents);
 
 router.route('/:id').
 get(eventController.getEvent).
-patch(eventController.uploadEventPhoto,eventController.resizeEventPhoto,eventController.updateEvent).
+patch(eventController.updateEvent).
 delete(eventController.deleteEvent);
 
 module.exports = router;

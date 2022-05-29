@@ -6,8 +6,8 @@ router.route('/').post(
     authMiddleware.protect,
     authMiddleware.restrictTo('donor'),
     donationController.setCharityDonorIds,
-    donationController.createDonation)
-router.route('/').get(donationController.getAllDonation);
+    donationController.createDonation).
+    get(authMiddleware.protect,donationController.getUserDonation);
 router.get('/get/stats',donationController.getDonationStats);
 
 

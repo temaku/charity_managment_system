@@ -16,9 +16,7 @@ export const register = async (userData) => {
 
 // login user
 export const login = async (userData) => {
-    console.log("userData: ", userData)
-    const response = await axios.post(`${API_BASE_URL}v1/admin/login`, userData)
-    console.log("response: ", response)
+    const response = await axios.post(`${API_BASE_URL}auth/login`, userData)
     if (response.data) {
         localStorage.setItem("currentUser", JSON.stringify(response.data))
     }

@@ -17,18 +17,6 @@ exports.createDonation = catchAsync( async (req,res,next)=>{
           data:donate
       })
 })
-exports.getAllDonation = catchAsync(async (req,res,next)=>{
-    console.log("inside the get");
-    const donations = await Donation.find();
-    if(!donations){
-        return next(new AppError('There is no donations',404))
-    }
-    res.status(200).json({
-        status:'success',
-        count:donations.length,
-        data:donations
-    })
-})
 exports.getUserDonation = catchAsync(async (req,res,next)=>{
    
     const donate = await Donation.find({donor:req.user.id});
@@ -45,8 +33,6 @@ exports.getUserDonation = catchAsync(async (req,res,next)=>{
 
     })
 })
-
-
 
 exports.getDonation = catchAsync(async (req,res,next)=>{
     const donate = await Donation.findById(req.params.id);
