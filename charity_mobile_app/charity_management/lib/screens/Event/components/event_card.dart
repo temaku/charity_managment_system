@@ -1,6 +1,9 @@
+import 'package:charity_management/Data/Models/event_model.dart';
 import 'package:flutter/material.dart';
 
 class EventCard extends StatelessWidget{
+  EventModel event;
+  EventCard(this.event);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -11,11 +14,13 @@ class EventCard extends StatelessWidget{
 
   SizedBox buildSizedBox(BuildContext context) {
     return SizedBox(
-    //height: 200,
+    //height: 100,
+    //width: 100,
         child: Card(
       elevation: 20,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         //mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Stack(
@@ -43,7 +48,7 @@ class EventCard extends StatelessWidget{
                   //left: 0,
                   child: ListTile(
                    // leading: Icon(Icons.location_pin),
-                    title: Text("Eyesus Yitaweklgn", style: TextStyle(color: Colors.white, fontSize: 23, fontWeight: FontWeight.w300),),
+                    title: Text(event.title, style: TextStyle(color: Colors.white, fontSize: 23, fontWeight: FontWeight.w300),),
                     //subtitle: Text('we'),
                    
 
@@ -60,12 +65,33 @@ class EventCard extends StatelessWidget{
                    // leading: Icon(Icons.location_pin),
                     //title: Text("Eyesus Yitaweklgn", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w300),),
                     subtitle: Text(
-                    "wendm gashe meteh yelem wey yitaweklgn eyesuse beka aaa beka nn beka betebalew lay eredate methe yelem wey",
+                      event.description,
                     style: TextStyle(color: Colors.black, fontWeight: FontWeight.w300),
                     ) ,
 
                   ),
                 ),
+
+               Container(
+                 margin: EdgeInsets.only(top: 5),
+                   padding: EdgeInsets.only(left: 15),
+                   child: Text('Event Time - ${event.date}',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    ),
+                 ),
+
+                 Container(
+                 margin: EdgeInsets.only(top: 5),
+                   padding: EdgeInsets.only(left: 15),
+                   child: Row(
+                     children: [
+                       Text('Location - Addisu Michael - Addis Ababa ',
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                        Icon(Icons.location_pin, color: Colors.blue, size: 15,)
+                     ],
+                   ),
+                 ),
 
 
           ButtonBar(

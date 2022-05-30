@@ -1,5 +1,6 @@
 import 'package:charity_management/constants.dart';
 import 'package:charity_management/screens/Login/login.dart';
+import 'package:charity_management/screens/Signup/signup.dart';
 import 'package:charity_management/screens/components/rounded_button.dart';
 import 'package:charity_management/screens/welcome/components/background.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,9 +31,9 @@ class Body extends StatelessWidget{
             ),
             RoundedButton(
               text: "SIGNUP",
-              color: kPrimaryLightColor,
+              //color: kPrimaryLightColor,
               textColor: Colors.black,
-              press: (){},
+              press: (){Navigator.push(context, MaterialPageRoute(builder: (context){return SignUp();}));},
             ),
           ],
         
