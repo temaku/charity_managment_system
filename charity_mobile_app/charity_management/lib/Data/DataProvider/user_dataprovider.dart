@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:charity_management/Data/Models/history_model.dart';
 import 'package:charity_management/Data/Models/user_model.dart';
+import 'package:charity_management/Data/Repository/authentication_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 class UserDataProvider{
@@ -57,6 +59,24 @@ class UserDataProvider{
       throw Exception('Failed to create User.');
     }
 
+  }
+
+   Future<List<HistoryModel>> getUserHistory(String id) async{
+    final response = await httpClient.get(
+      "$_baseUrl/v1/users/$id",
+      headers: <String, String>{
+        'Content-Type' : 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${AuthenticationRepository.storage}',
+            }
+      );
+
+    if(response.statusCode == 200){
+      final historys = jsonDecode(response.body)['data']['donations'] as List;
+      return historys.map((history) => HistoryModel.fromJson(history)).toList();
+    }else{
+      throw Exception("failed to fetch History");
+    }
   }
 
 

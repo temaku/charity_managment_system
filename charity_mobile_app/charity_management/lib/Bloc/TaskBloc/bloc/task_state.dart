@@ -19,5 +19,10 @@ class TaskSuccess extends TaskState{
   // TODO: implement props
   List<Object> get props => [tasks];
 }
-
 class TaskFailure extends TaskState{}
+
+class ReportLoading extends TaskState{}
+
+class ReportSuccess extends TaskState{}
+
+class ReportFailed extends TaskState{}

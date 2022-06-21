@@ -17,14 +17,17 @@ class Body extends StatelessWidget {
         else if( 
         state is FundraiseSucess
           ){
-        return  ListView.builder(
-                itemCount: state.fundraises.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return FundraiseCard(state.fundraises[index], index);
+        return  RefreshIndicator(
+          onRefresh: () async{BlocProvider.of<FundraiseBloc>(context).add(FetchFundraise());},
+          child: ListView.builder(
+                  itemCount: state.fundraises.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return FundraiseCard(state.fundraises[index], index);
+                    
+                  },
                   
-                },
-                
-                );
+                  ),
+        );
         }
 
         

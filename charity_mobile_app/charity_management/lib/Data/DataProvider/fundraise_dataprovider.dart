@@ -53,11 +53,9 @@ class FundraiseDataprovider {
       }),
     );
 
-    if(response.statusCode == 200){
-      
-      
-    }else{
-      throw Exception("failed to fetch fundraises");
+    if(response.statusCode != 201){
+     
+      throw Exception("failed to to donate");
     }
   }
 
@@ -81,15 +79,47 @@ class FundraiseDataprovider {
       }),
     );
 
-    if(response.statusCode == 200){
+    if(response.statusCode != 201){
       
       
-    }else{
+    
       throw Exception("failed to fetch fundraises");
     }
   }
 
-  
+
+
+
+    Future<dynamic> createPaymentIntent(DonationModel donation, String currency) async{
+    try {
+       final response = await httpClient.post(
+      '$_baseUrl/v1/donations/payment-sheet',
+      
+      headers: <String, String>{
+        'Content-Type' : 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${AuthenticationRepository.storage}',
+      },
+
+      body: jsonEncode(<String, dynamic>{
+        "amount" : donation.amount,
+        'currency' : currency,
+        'userId' : donation.userId,
+        'charityOrFundId' : donation.id
+      },
+       ));
+
+    return jsonDecode(response.body);
+      
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+   
+
 
 
 }
+}
+
+
+

@@ -48,3 +48,12 @@ class SignUpButtonPressed extends UserEvent{
   // TODO: implement props
   List<Object> get props => [user];
 }
+
+class FetchUserHistory extends UserEvent{
+  String id;
+  FetchUserHistory(this.id);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [id];
+}

@@ -52,11 +52,17 @@ class _BodyState extends State<Body> {
               ),
             ),
     
-            SizedBox(height: 10,),
+            SizedBox(height: 70,),
+
+
+           // ElevatedButton.icon(
+              // onPressed: (){pickImage();}, 
+              // icon: Icon(Icons.image_outlined), 
+              // label: Text('Select image')),
     
            
     
-           // SizedBox(height: 20,),
+            SizedBox(height: 20,),
     
             Form(
               key: _formKey,
@@ -90,7 +96,9 @@ class _BodyState extends State<Body> {
               child: TextFormField(
                 
                // initialValue: "",
-                minLines: null,
+                expands: true,
+                maxLines: null,
+               // minLines: null,
                 decoration: InputDecoration(labelText: "Description"),
                 validator:(value) {
                   if(value.isEmpty){
@@ -110,9 +118,9 @@ class _BodyState extends State<Body> {
             SizedBox(height: 30,),
     
            
-            SizedBox(height: 30,),
+   
             Container(
-              width: 200,
+            //  width: 200,
               child: TextFormField(
                 //initialValue: "0.0",
                 decoration: InputDecoration(labelText: "Amount"),
@@ -126,7 +134,7 @@ class _BodyState extends State<Body> {
                 },
     
                 onSaved: (newValue){
-                  this.fundraise.amount = newValue as int;
+                  this.fundraise.amount = int.parse(newValue) ;
                 },
                 
     
@@ -137,6 +145,8 @@ class _BodyState extends State<Body> {
               ),
               ),
 
+              SizedBox(height: 30,),
+
             ElevatedButton.icon(
               onPressed: (){
                 final form = _formKey.currentState;
@@ -146,14 +156,59 @@ class _BodyState extends State<Body> {
                   
                   
 
-                  BlocProvider.of<FundraiseBloc>(context).add(AddFundraise(fundraise));
+                  BlocProvider.of<DonationBloc>(context).add(AddFundraise(fundraise));
                 }
 
 
             },
             
              icon: Icon(Icons.money), 
-             label: Text("Submit Fundraise"))
+             label: Text("Submit Fundraise")),
+
+
+
+             BlocConsumer<DonationBloc, DonationState>(
+               listener: (context, state) {
+                 // TODO: implement listener
+                 if(state is AddFundraiseSucess){
+                    showDialog(
+                      barrierDismissible: false,
+                     context: context, 
+                     builder: (_){
+                      return CupertinoAlertDialog(
+                     title: Text('Fundraise Submitted!'),
+                     content: Text('Soon People will start Donating Thank you'),
+                     actions: [
+                       CupertinoDialogAction(
+                         child: Text('Okay'),
+                         onPressed: (){
+                           Navigator.pop(context);
+                           //Navigator.pop(context);
+                         },
+                       ),
+                     ],
+
+
+                   );
+                     }
+                     );
+                     //return Container();
+                   //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Signing up sucessful")));
+                   //Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>  LoginScreen()), (route) => false);
+                 }else if( state is AddFundraiseFailed){
+                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Fundraising Failed! please try again")));
+                 }
+                 
+               },
+             //  child: Container(),
+             builder: (context, state){
+               if(state is AddFundraiseLoading){
+                   return Center(child: CircularProgressIndicator());
+                 }
+               return Container();
+             },
+             ),
+           
            
     
     
@@ -162,5 +217,11 @@ class _BodyState extends State<Body> {
         ),
       ),
     );
+
+
+  }
+
+  Future pickImage() async{
+   // final image = await ima
   }
 }

@@ -10,3 +10,12 @@ abstract class CharityEvent extends Equatable {
 class FetchCharity extends CharityEvent{}
 
 class RefreshCharity extends CharityEvent{}
+
+
+class DonateToNodeCharity extends CharityEvent{
+  //DonationModel raise;
+  String  amount;
+  String id;
+
+  DonateToNodeCharity(this.amount, this.id);
+}

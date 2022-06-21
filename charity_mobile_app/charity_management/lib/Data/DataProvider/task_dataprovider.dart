@@ -31,23 +31,23 @@ class TaskDataprovider {
     }
   }
 
-  Future<List<TaskModel>> acceptTask(String id) async{
-    final response =await httpClient.put(
+  Future<TaskModel> acceptTask(String id) async{
+    final response =await httpClient.patch(
       '$_baseUrl/v1/tasks/$id',
       headers: <String, String>{
         'Content-Type' : 'application/json; charset=UTF-8',
         'Accept': 'application/json',
         'Authorization': 'Bearer ${AuthenticationRepository.storage}',
       },
-      body: jsonEncode(<String, String>{
+      body: jsonEncode(<String, dynamic>{
         'status' : 'accepted',
       })
 
       );
 
       if(response.statusCode == 200){
-        final tasks = jsonDecode(response.body)['data'] as List;
-        return tasks.map((task) => TaskModel.fromJson(task)).toList();
+        final task = jsonDecode(response.body)['data'];
+        return TaskModel.fromJson(task);
         }else{
       throw Exception("failed to accept Task");
     }
@@ -55,8 +55,8 @@ class TaskDataprovider {
   }
 
 
-  Future<List<TaskModel>> rejectTask(String id) async{
-    final response =await httpClient.put(
+  Future<TaskModel> rejectTask(String id) async{
+    final response =await httpClient.patch(
       '$_baseUrl/v1/tasks/$id',
       headers: <String, String>{
         'Content-Type' : 'application/json; charset=UTF-8',
@@ -70,8 +70,8 @@ class TaskDataprovider {
       );
 
       if(response.statusCode == 200){
-        final tasks = jsonDecode(response.body)['data'] as List;
-        return tasks.map((task) => TaskModel.fromJson(task)).toList();
+        final task = jsonDecode(response.body)['data'];
+        return TaskModel.fromJson(task);
         }else{
       throw Exception("failed to reject Task");
     }
@@ -80,7 +80,7 @@ class TaskDataprovider {
 
     Future<void> report(ReportModel report) async{
       final response = await httpClient.post(
-        '$_baseUrl/v1/reports/',
+        '$_baseUrl/v1/reports',
 
         headers: <String, String>{
         'Content-Type' : 'application/json; charset=UTF-8',
@@ -89,13 +89,9 @@ class TaskDataprovider {
         },
 
         body: jsonEncode(<String, dynamic>{
-          'id' : report.id,
           'title' : report.title,
           'description' : report.description,
-          'status' : report.status,
-          'volunteerId' : report.volunteerid,
-          'reportedAt' : report.reportedAt,
-
+          'volunterId' : report.volunteerid,
         }),
 
       );

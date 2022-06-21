@@ -14,9 +14,18 @@ import 'package:charity_management/Data/Repository/user_repository.dart';
 import 'package:charity_management/app.dart';
 import 'package:flutter/material.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
 
-void main() {
+
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey = 'pk_test_51LC8G9BH7DonVD3DWVatc74bvTXy2GZBSWkFCk1GJdexQmlr0tZ7X5PoE8YRKxQZdjYQM1fT6h1YYnHURzSFDIuH000tdkXuQu';
+ // Stripe.merchantIdentifier = "taf";
+  //await Stripe.instance.applySettings();
+
+
   Bloc.observer = blocObserver();
   final UserRepository userRepository = UserRepository(dataProvider: UserDataProvider(httpClient: http.Client()));
   final AuthenticationRepository authenticationRepository = AuthenticationRepository(authenticationDataProvider: AuthenticationDataProvider(httpClient: http.Client()));

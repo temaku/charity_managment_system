@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:charity_management/Data/Models/charity_model.dart';
 import 'package:charity_management/screens/Home/charity_detail/charity_detail.dart';
 
 import 'package:flutter/material.dart';
+
 
 class DonationCard extends StatelessWidget{
   CharityModel charity;
@@ -27,8 +29,10 @@ class DonationCard extends StatelessWidget{
                     Colors.grey, 
                     BlendMode.modulate),
 
-                    child: Image.asset(
-                    "assets/images/donate42.jpg",
+                    child: CachedNetworkImage(
+                             imageUrl: charity.image,
+                             placeholder: (context, url) => Center(child: const CircularProgressIndicator()),
+                  //  placeholder: kTransparentImage,
                     height: 200,
                     fit: BoxFit.fitWidth,
                   ),

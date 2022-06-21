@@ -9,7 +9,9 @@ import 'package:charity_management/Bloc/charity_bloc.dart/bloc/charity_bloc.dart
 import 'package:charity_management/constants.dart';
 import 'package:charity_management/screens/Login/components/background.dart';
 import 'package:charity_management/screens/Navigation/tabbar.dart';
+import 'package:charity_management/screens/Signup/signup.dart';
 import 'package:charity_management/screens/VolunteerAccount/navigation/volunteer_home.dart';
+import 'package:charity_management/screens/components/already_havae_an_account_check.dart';
 import 'package:charity_management/screens/components/rounded_button.dart';
 import 'package:charity_management/screens/components/rounded_input_field.dart';
 import 'package:charity_management/screens/components/rounded_password_field.dart';
@@ -57,6 +59,15 @@ class Body extends StatelessWidget {
                   controller: _passwordController,
                 ),
 
+
+              
+
+
+                
+
+
+
+
                 BlocListener<AuthenticationBloc, AuthenticationState>(
                   listener: (context, state) {
                     // TODO: implement listener
@@ -73,7 +84,10 @@ class Body extends StatelessWidget {
                           BlocProvider.of<CharityBloc>(context).add(FetchCharity());
                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Tabbar()), (route) => false);
                            BlocProvider.of<FundraiseBloc>(context).add(FetchFundraise());
-                      context.read<EventBloc>().add(FetchEvent());
+                           context.read<EventBloc>().add(FetchEvent());
+                           context.read<UserBloc>().add(FetchUserHistory(state.user.id));
+
+                           
 
 
                         }else if(state.user.role == 'volunteers'){
@@ -83,6 +97,9 @@ class Body extends StatelessWidget {
 
                       }
                   },
+
+
+
                   child: RoundedButton(
                     text: "LOGIN",
                     press: () {
@@ -113,19 +130,25 @@ class Body extends StatelessWidget {
                                       
                                 );
                   },
+                ),
+
+                
+    SizedBox(height: 30,),
+
+                AlreadyHaveAnAccountCheck(
+                login: true,
+                press: () {
+                  Navigator.push(
+                  context, 
+                  MaterialPageRoute(
+                    builder: (context){
+                      return SignUp();
+                      }
+                      )
+                  );
+                }
                 )
-                // AlreadyHaveAnAccountCheck(
-                //   press: () {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) {
-                //           return SignUpScreen();
-                //         },
-                //       ),
-                //     );
-                //   },
-                // ),
+                
               ],
             ),
           ),

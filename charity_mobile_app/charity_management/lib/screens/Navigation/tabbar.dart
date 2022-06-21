@@ -29,7 +29,7 @@ class _TabbarState extends State<Tabbar> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home',),
-          BottomNavigationBarItem(icon: Icon(Icons.event), label: "Event",),
+          BottomNavigationBarItem(icon: Icon(Icons.backpack), label: "Charity",),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "me",)
 
         ],

@@ -14,7 +14,7 @@ class TaskModel extends Equatable{
 
   factory TaskModel.fromJson(Map<String,dynamic> parsedJson) {
     return TaskModel(
-      id: parsedJson['id'],
+      id: parsedJson['_id'],
       task: parsedJson['task'],
       description: parsedJson['description'],
       volunteer: parsedJson['volunteer'],

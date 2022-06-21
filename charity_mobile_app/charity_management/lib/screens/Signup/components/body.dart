@@ -1,6 +1,11 @@
 import 'package:charity_management/Bloc/UserBloc/user_bloc.dart';
 import 'package:charity_management/Bloc/UserBloc/user_event.dart';
+import 'package:charity_management/Bloc/UserBloc/user_state.dart';
 import 'package:charity_management/Data/Models/user_model.dart';
+import 'package:charity_management/screens/Login/login.dart';
+import 'package:charity_management/screens/components/already_havae_an_account_check.dart';
+import 'package:charity_management/screens/components/rounded_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,6 +33,7 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
+        margin: EdgeInsets.only(top: 80),
         padding: EdgeInsets.all(40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -41,7 +47,7 @@ class _BodyState extends State<Body> {
               ),
             ),
     
-            SizedBox(height: 10,),
+            SizedBox(height: 30,),
     
            
     
@@ -122,11 +128,14 @@ class _BodyState extends State<Body> {
               ),
             ),
 
+            SizedBox(height: 30,),
+
 
             Container(
               //width: 200,
               child: TextFormField(
                 //initialValue: "0.0",
+                obscureText: true,
                 decoration: InputDecoration(labelText: "password"),
                 validator:(value) {
                   if(value.isEmpty){
@@ -145,10 +154,13 @@ class _BodyState extends State<Body> {
               ),
             ),
 
+            SizedBox(height: 30,),
+
 
             Container(
              // width: 200,
               child: TextFormField(
+                obscureText: true,
                 //initialValue: "0.0",
                 decoration: InputDecoration(labelText: "Confirm password"),
                 validator:(value) {
@@ -161,7 +173,11 @@ class _BodyState extends State<Body> {
                 },
     
                 onSaved: (newValue){
+                  if(newValue != user.role){
+                    return 'Password unmatched';
+                  }else{
                   this.user.id = newValue;
+                  }
                 },
                 
     
@@ -172,23 +188,92 @@ class _BodyState extends State<Body> {
               ),
               ),
 
-            ElevatedButton.icon(
-              onPressed: (){
-                final form = _formKey.currentState;
-                if(form.validate()){
-                  form.save();
-                 // donation.id = raise.id;
-                  
-                  
+              SizedBox(height: 50,),
 
-                  BlocProvider.of<UserBloc>(context).add(SignUpButtonPressed(user));
+            Container(
+              alignment: Alignment.center,
+
+             // width: 150,
+              child: ElevatedButton(
+                
+                onPressed: (){
+                  final form = _formKey.currentState;
+                  if(form.validate()){
+                    form.save();
+                   // donation.id = raise.id;
+                    
+                    
+
+                    BlocProvider.of<UserBloc>(context).add(SignUpButtonPressed(user));
+                  }
+
+
+              },
+              
+               //icon: Icon(Icons.money), 
+              // label: Text("Sign up")
+              child: Text('Sign Up'),
+               ),
+            ),
+
+             BlocConsumer<UserBloc, UserState>(
+               listener: (context, state) {
+                 // TODO: implement listener
+                 if(state is UserSignUpSucess){
+                    showDialog(
+                      barrierDismissible: false,
+                     context: context, 
+                     builder: (_){
+                      return CupertinoAlertDialog(
+                     title: Text('Sign Up Completed!'),
+                     content: Text('Thank you for regestering, start helping people from now!'),
+                     actions: [
+                       CupertinoDialogAction(
+                         child: Text('continue'),
+                         onPressed: (){
+                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>  LoginScreen()), (route) => false);
+                         },
+                       ),
+                     ],
+
+
+                   );
+                     }
+                     );
+                     //return Container();
+                   //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Signing up sucessful")));
+                   //Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>  LoginScreen()), (route) => false);
+                 }else if( state is UserSignUpFailed){
+                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Signing up failed Try again!")));
+                 }
+                 
+               },
+             //  child: Container(),
+             builder: (context, state){
+               if(state is UserSignUpLoading){
+                   return Center(child: CircularProgressIndicator());
+                 }
+               return Container();
+             },
+             ),
+
+             
+
+              //SizedBox(height: size.height * 0.03,),
+
+              AlreadyHaveAnAccountCheck(
+                login: false,
+                press: () {
+                  Navigator.push(
+                  context, 
+                  MaterialPageRoute(
+                    builder: (context){
+                      return LoginScreen();
+                      }
+                      )
+                  );
                 }
-
-
-            },
-            
-             icon: Icon(Icons.money), 
-             label: Text("Sign up"))
+                )
            
     
     

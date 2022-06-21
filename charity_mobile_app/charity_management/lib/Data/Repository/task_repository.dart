@@ -11,11 +11,11 @@ class TaskRepository {
     return await taskDataprovider.getAllTasks();
   }
 
-  Future<List<TaskModel>> acceptTask(String id) async{
+  Future<TaskModel> acceptTask(String id) async{
     return await taskDataprovider.acceptTask(id);
   }
 
-  Future<List<TaskModel>> rejectTask(String id) async{
+  Future<TaskModel> rejectTask(String id) async{
     return await taskDataprovider.rejectTask(id);
   }
 

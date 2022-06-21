@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 
 class EventModel extends Equatable{
   String id;
@@ -6,8 +7,9 @@ class EventModel extends Equatable{
   String description;
   String date;
   String organizer;
+  String image;
 
-  EventModel({this.id, this.title, this.description, this.date, this.organizer});
+  EventModel({this.id, this.title, this.description, this.image, this.date, this.organizer});
 
 
   factory EventModel.fromJson(Map<String,dynamic> parsedJson) {
@@ -17,6 +19,7 @@ class EventModel extends Equatable{
       description: parsedJson['description'],
       date: parsedJson['date'],
       organizer: parsedJson['organizer'],
+      image: parsedJson['image'],
      
 
     );

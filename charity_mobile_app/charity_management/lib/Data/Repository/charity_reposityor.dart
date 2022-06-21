@@ -13,4 +13,14 @@ class CharityRepository{
     return await charityDataProvider.getAllCharitys(token);
     
   }
+
+  Future<CharityModel> getSingleCharity(String id) async{
+    return await charityDataProvider.getSingleCharity(id);
+    
+  }
+
+  Future<void> donateToCharity(String amount, String id) async{
+    return await charityDataProvider.donateToCharity(amount, id);
+    
+  }
 }

@@ -9,14 +9,19 @@ class Task extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return BlocBuilder<TaskBloc, TaskState>(
+      //buildWhen: (previous, current) => current is TaskSuccess && current != previous,
       builder: (context, state) {
+        if( state is TaskLoading){
+          return Center(child: CircularProgressIndicator());
+        }
         if (state is TaskSuccess){
                 
         return ListView.builder(
           itemCount: state.tasks.length,
           itemBuilder: (BuildContext context, int index) {
-              return state.tasks[index].status == 'accepted'? Body(state.tasks[index]) : Container();
-
+              return
+              // Body(state.tasks[index]);
+              state.tasks[index].status == 'accepted'? Body(state.tasks[index]) : Container();
             
           },
         );

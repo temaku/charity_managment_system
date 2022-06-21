@@ -22,3 +22,11 @@ class CharitySuccess extends CharityState{
 
 
 class CharityFailure extends CharityState{}
+
+class DonationNodeSucess extends CharityState{
+
+}
+
+class DonationNodeFailed extends CharityState{}
+
+class DonationNodeLoading extends CharityState{}

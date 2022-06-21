@@ -9,12 +9,12 @@ class CharityModel extends Equatable{
   String email;
   String address;
   String phone;
-  int NumOfDonors;
-  int SumOfDonations;
+  int numOfDonors;
+  int sumOfDonations;
   String createdAt;
   String updatedAt;
 
-  CharityModel({this.id, this.name, this.description, this.category, this.image, this.email, this.address, this.phone, this.NumOfDonors, this.SumOfDonations,this.createdAt,this.updatedAt});
+  CharityModel({this.id, this.name, this.description, this.category, this.image, this.email, this.address, this.phone, this.numOfDonors, this.sumOfDonations,this.createdAt,this.updatedAt});
 
   factory CharityModel.fromJson(Map<String, dynamic> parsedJson){
     return CharityModel(
@@ -26,8 +26,8 @@ class CharityModel extends Equatable{
       email: parsedJson['email'],
       address: parsedJson['address'],
       phone: parsedJson['phone'],
-      NumOfDonors: parsedJson['NumOfDonors'],
-      SumOfDonations: parsedJson['SumOfDonations'],
+      numOfDonors: parsedJson['NumOfDonors'],
+      sumOfDonations: parsedJson['SumofDonations'],
       createdAt: parsedJson['createdAt'],
       updatedAt: parsedJson['updatedAt'],
     );
@@ -35,6 +35,6 @@ class CharityModel extends Equatable{
 
   @override
   // TODO: implement props
-  List<Object> get props => [id,name,description,category,image,email,address,phone,NumOfDonors,SumOfDonations,createdAt,updatedAt];
+  List<Object> get props => [id,name,description,category,image,email,address,phone,numOfDonors,sumOfDonations,createdAt,updatedAt];
 
 }

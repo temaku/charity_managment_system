@@ -1,4 +1,5 @@
 import 'package:charity_management/Data/Models/authentication_model.dart';
+import 'package:charity_management/Data/Models/history_model.dart';
 import 'package:charity_management/Data/Models/user_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,3 +39,15 @@ abstract class UserState extends Equatable{
 class UserSignUpSucess extends UserState{}
 
 class UserSignUpFailed extends UserState{}
+
+class UserSignUpLoading extends UserState{}
+
+
+class UserHistorySuccess extends UserState{
+  List<HistoryModel> historys;
+  UserHistorySuccess(this.historys);
+}
+
+class UserHistoryFailed extends UserState{}
+
+class UserHistoryLoading extends UserState{}

@@ -39,7 +39,7 @@ class _VolunteerHome extends State<VolunteerHome> {
         //titleSpacing: 110,
         actions: [
          // IconButton(icon: Icon(Icons.history), onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context){return History();}));}),
-          IconButton(icon: Icon(Icons.event), onPressed: null),
+         // IconButton(icon: Icon(Icons.event), onPressed: null),
         ],
         
       ),
@@ -61,13 +61,13 @@ class _VolunteerHome extends State<VolunteerHome> {
       _selectedIndex = index;
     });
    
-    // if(index == 2){
-    //  // Navigator.push(context, MaterialPageRoute(builder: (context){return Profile();}));
-    // }else{
-    //    _pageController.jumpToPage(index);
+    if(index == 2){
+      Navigator.push(context, MaterialPageRoute(builder: (context){return Profile();}));
+    }else{
+       _pageController.jumpToPage(index);
 
-    // }
+    }
     //_pageController.animateToPage(index, duration: Duration(milliseconds: 1000), curve: Curves.bounceOut);
-    _pageController.jumpToPage(index);
+   // _pageController.jumpToPage(index);
   }
 }

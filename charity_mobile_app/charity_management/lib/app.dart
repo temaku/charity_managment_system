@@ -54,10 +54,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Charity Management',
       theme: ThemeData(
-       // primaryColor: kPrimaryColor,
+        //primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
+       // backgroundColor: Colors.white
+        
       ),
-      // themeMode: ThemeMode.dark,
+       themeMode: ThemeMode.light,
       // darkTheme: ThemeData(
       //   bottomNavigationBarTheme: BottomNavigationBarThemeData(
       //     backgroundColor: Colors.black,

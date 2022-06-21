@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:charity_management/Data/Models/charity_model.dart';
 import 'package:charity_management/Data/Models/fundraise_model.dart';
 import 'package:charity_management/screens/Fundraise/fundraise.dart';
@@ -24,8 +25,10 @@ class Body extends StatelessWidget {
             width: double.infinity,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                'assets/images/donate3.png',
+              child: CachedNetworkImage(
+                             imageUrl: charity.image,
+                             placeholder: (context, url) => Center(child: const CircularProgressIndicator()),
+                
                 fit: BoxFit.cover,
               ),
             ),
@@ -59,7 +62,7 @@ class Body extends StatelessWidget {
 
            Container(
                padding: EdgeInsets.only(left: 10),
-               child: Text('${charity.NumOfDonors-1}+ donated',
+               child: Text('${charity.numOfDonors}+ donated',
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                 ),
              ),
@@ -85,7 +88,7 @@ class Body extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(left: 10),
                 child: Text(
-              'Goals: \$5000',
+              '',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
              ),
               ),
@@ -93,7 +96,7 @@ class Body extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(left: 0, right: 10),
                 child: Text(
-              'Raised: \$${charity.SumOfDonations}',
+              'Raised: \$${charity.sumOfDonations}',
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300, color: Colors.blue),
              ),
               ),
@@ -142,7 +145,7 @@ class Body extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: FlatButton(
-          onPressed: (){ //Navigator.push(context, MaterialPageRoute(builder: (context) => DonateTo()));
+          onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context) => DonateTo(FundraiseModel(id: charity.id, title: 'charity'))));
           },
          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
          color: Colors.blue,

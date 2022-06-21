@@ -1,9 +1,22 @@
+import 'package:charity_management/Data/Models/charity_model.dart';
+import 'package:charity_management/Data/Models/history_model.dart';
+import 'package:charity_management/Data/Repository/charity_reposityor.dart';
+import 'package:charity_management/Data/Repository/user_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Body extends StatelessWidget{
+  HistoryModel history;
+  //final charity;
+  Body(this.history);
+  //CharityModel charity;
+  
+
   @override
   Widget build(BuildContext context) {
+   // final charity = RepositoryProvider.of<CharityRepository>(context).getSingleCharity(history.charity);
+    //CharityModel cha = await charity;
     // TODO: implement build
     return Container(
       margin: EdgeInsets.only(top: 20),
@@ -15,7 +28,8 @@ class Body extends StatelessWidget{
             width: double.infinity,
             padding: EdgeInsets.only(left: 10),
              child: Text(
-              'MONDAY, MAY 12',
+             // 'MONDAY, MAY 12',
+             history.donatedAt,
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
              ),
              alignment: Alignment.centerLeft,
@@ -31,8 +45,14 @@ class Body extends StatelessWidget{
           children: [
             ListTile(
               //leading: Icon(Icons.money),
-              title: Text('Mekedonia charity'),
-              subtitle: Text('Gubznayen nigesbet eske chika eske shbet kberbgn yene geta'),
+              title: Text(
+                history.charityName,
+             //  '${charity.then((value) => value.name)}',
+                ),
+              subtitle: Text(
+               // '${charity.then((value) => value.description)}',
+                history.charityDescription,
+                ),
             ),
 
         
@@ -50,7 +70,10 @@ class Body extends StatelessWidget{
                           Container(child: Text('Donation Amount'), 
                           margin: EdgeInsets.all(10),
                           ),
-                          Container(child: Text('500', style: TextStyle(color:Colors.blue),))
+                          Container(child: Text(
+                          //  '500',
+                          history.donate.toString(),
+                             style: TextStyle(color:Colors.blue),))
                         ],
                       ),
 
@@ -60,7 +83,10 @@ class Body extends StatelessWidget{
                         children: [
                           Container(child: Text('Payment Type'),
                           margin: EdgeInsets.all(10),),
-                          Container(child: Text('Tele Birr', style: TextStyle(color:Colors.blue),)),
+                          Container(child: Text(
+                           'Stripe', 
+                           // history.DonationOption,
+                            style: TextStyle(color:Colors.blue),)),
                         ],
                       )
 
@@ -71,7 +97,7 @@ class Body extends StatelessWidget{
 
              Container(
                padding: EdgeInsets.only(left: 15),
-               child: Text('Donation Time - 11:45',
+               child: Text('Donation Time - ${history.donatedAt}',
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                 ),
              ),
@@ -84,4 +110,8 @@ class Body extends StatelessWidget{
       ),
     );
   }
+
+  // CharityModel getCharity() async*{
+  // //  return await RepositoryProvider.of<CharityRepository>(context).getSingleCharity(state.historys[index].charity);
+  // }
 }

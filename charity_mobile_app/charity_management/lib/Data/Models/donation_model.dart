@@ -5,7 +5,7 @@ class DonationModel extends Equatable{
   String username;
   String phone;
   String DonationOption;
-  String amount;
+  int amount;
   String userId;
 
   String password;

@@ -11,12 +11,24 @@ class FetchFundraise extends FundraiseEvent{}
 
 class RefreshFundraise extends FundraiseEvent{}
 
-class DonateToFundraise extends FundraiseEvent{
-  DonationModel raise;
-  DonateToFundraise(this.raise);
+class DonationEvent{}
+
+class DonateToFundraise extends DonationEvent{
+  //DonationModel raise;
+  DonationModel donation;
+  String currency;
+  DonateToFundraise(this.donation, this.currency);
 }
 
-class AddFundraise extends FundraiseEvent{
+class DonateToNode extends DonationEvent{
+  //DonationModel raise;
+  DonationModel donation;
+
+  DonateToNode(this.donation,);
+}
+
+
+class AddFundraise extends DonationEvent{
   FundraiseModel fundraise;
   AddFundraise(this.fundraise);
 }

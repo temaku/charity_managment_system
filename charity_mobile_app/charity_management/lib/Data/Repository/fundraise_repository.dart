@@ -19,4 +19,8 @@ class FundraiseRepository {
   Future<void> fundraise(FundraiseModel fundraise) async{
     return await fundraiseDataprovider.fundraise(fundraise);
   }
+
+  Future<dynamic> createPaymentIntent(DonationModel donation, String currency) async{
+    return await fundraiseDataprovider.createPaymentIntent(donation, currency);
+  }
 }

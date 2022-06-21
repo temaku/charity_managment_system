@@ -1,4 +1,6 @@
 import 'package:charity_management/Bloc/TaskBloc/bloc/task_bloc.dart';
+import 'package:charity_management/Bloc/TaskBloc/task_accept_reject/task_accept_reject_bloc.dart';
+import 'package:charity_management/Bloc/TaskBloc/task_accept_reject/taskaccrej_event.dart';
 import 'package:charity_management/Data/Models/task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,7 +76,7 @@ class Body extends StatelessWidget{
                     
                     borderRadius: BorderRadius.circular(15),
                     child: FlatButton(
-                        onPressed: () { BlocProvider.of<TaskBloc>(context).add(AcceptTask(task.id)); },
+                        onPressed: () { BlocProvider.of<TaskAcceptRejectBloc>(context).add(AcceptTask(task.id)); },
                       //  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                         color: Colors.blue,
                         child: Text(
@@ -96,7 +98,7 @@ class Body extends StatelessWidget{
                     
                     borderRadius: BorderRadius.circular(15),
                     child: FlatButton(
-                        onPressed: () {BlocProvider.of<TaskBloc>(context).add(RejectTask(task.id));},
+                        onPressed: () {BlocProvider.of<TaskAcceptRejectBloc>(context).add(RejectTask(task.id));},
                       //  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                         color: Colors.red,
                         child: Text(
@@ -112,6 +114,9 @@ class Body extends StatelessWidget{
             
           ],
         ),
+
+
+        
       
         ]
         )

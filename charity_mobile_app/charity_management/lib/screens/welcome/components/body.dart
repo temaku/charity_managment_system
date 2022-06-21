@@ -21,7 +21,7 @@ class Body extends StatelessWidget{
             Text("WELCOME TO CHARITY MANAGEMENT"),
             SizedBox(height: size.height * 0.05,),
             Image.asset(
-              "assets/images/signup_top.png",
+              "assets/images/logo.png",
               height: size.height * 0.45,
             ),
             SizedBox(height: size.height * 0.05),
@@ -32,7 +32,7 @@ class Body extends StatelessWidget{
             RoundedButton(
               text: "SIGNUP",
               //color: kPrimaryLightColor,
-              textColor: Colors.black,
+              textColor: Colors.white,
               press: (){Navigator.push(context, MaterialPageRoute(builder: (context){return SignUp();}));},
             ),
           ],

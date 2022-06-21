@@ -11,12 +11,17 @@ class HomeBody extends StatelessWidget {
     return BlocBuilder<CharityBloc, CharityState>(
       builder: (context, state) {
          if(state is CharitySuccess){
-           return ListView.builder(
-            itemCount: state.charityModel.length,
-            itemBuilder: (BuildContext context, int index) {
-              return DonationCard(state.charityModel[index]);
-            }
-            );
+           return RefreshIndicator(
+            onRefresh: () async{BlocProvider.of<CharityBloc>(context).add(FetchCharity());},
+             child: ListView.builder(
+              itemCount: state.charityModel.length,
+              itemBuilder: (BuildContext context, int index) {
+                return DonationCard(state.charityModel[index]);
+              }
+              ),
+           );
+      }if(state is CharityLoading){
+        return Center(child: CircularProgressIndicator(),);
       }
       return Container();
       }

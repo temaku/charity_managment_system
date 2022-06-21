@@ -11,14 +11,17 @@ class Body extends StatelessWidget {
     return BlocBuilder<EventBloc, EventState>(
       builder: (context, state) {
         if(state is EventSuccess){
-        return ListView.builder(
-            itemCount: state.events.length,
-            itemBuilder: (BuildContext context, int index) {
-              return EventCard(state.events[index]);
-            });
+        return RefreshIndicator(
+          onRefresh: () async{BlocProvider.of<EventBloc>(context).add(FetchEvent());},
+          child: ListView.builder(
+              itemCount: state.events.length,
+              itemBuilder: (BuildContext context, int index) {
+                return EventCard(state.events[index]);
+              }),
+        );
 
         }else if (state is EventLoading){
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         }
         return Container();
       },

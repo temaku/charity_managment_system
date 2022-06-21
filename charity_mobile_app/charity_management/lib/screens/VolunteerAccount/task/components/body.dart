@@ -1,4 +1,5 @@
 import 'package:charity_management/Data/Models/task_model.dart';
+import 'package:charity_management/screens/VolunteerAccount/report/report.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatelessWidget{
@@ -70,7 +71,7 @@ class Body extends StatelessWidget{
                   
                   borderRadius: BorderRadius.circular(15),
                   child: FlatButton(
-                      onPressed: () {},
+                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Report(task)));},
                     //  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                       color: Colors.blue,
                       child: Text(

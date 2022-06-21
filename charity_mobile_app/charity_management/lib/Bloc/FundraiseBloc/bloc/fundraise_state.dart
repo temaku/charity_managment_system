@@ -22,11 +22,28 @@ class FundraiseSucess extends FundraiseState{
 
 class FundraiseFailure extends FundraiseState{}
 
-class DonationFundSucess extends FundraiseState{}
+class DonationState{}
+class DonationInitial extends DonationState{}
 
-class DonationFundFailed extends FundraiseState{}
+class DonationFundSucess extends DonationState{
+  var response;
+  DonationFundSucess(this.response);
+}
 
-class AddFundraiseSucess extends FundraiseState{}
+class DonationFundFailed extends DonationState{}
 
-class AddFundraiseFailed extends FundraiseState{}
+class DonationFundLoading extends DonationState{}
 
+class AddFundraiseSucess extends DonationState{}
+
+class AddFundraiseFailed extends DonationState{}
+
+class AddFundraiseLoading extends DonationState{}
+
+class DonationNodeSucess extends DonationState{
+
+}
+
+class DonationNodeFailed extends DonationState{}
+
+class DonationNodeLoading extends DonationState{}

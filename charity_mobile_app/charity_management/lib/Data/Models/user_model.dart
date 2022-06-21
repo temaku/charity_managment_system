@@ -42,7 +42,7 @@ class UserModel extends Equatable{
       phone: parsedJson['phone'], 
       address: parsedJson['address'], 
       role: parsedJson['role'], 
-      noOfDonation: parsedJson['noOfDonations'],
+      noOfDonation: parsedJson['noOfDonation'],
       totalDonations: parsedJson['totalDonations'],
       active: parsedJson['active'],
       );

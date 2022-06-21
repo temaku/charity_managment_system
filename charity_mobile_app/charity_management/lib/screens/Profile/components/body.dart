@@ -51,7 +51,10 @@ class Body extends StatelessWidget {
                       radius: 50.0,
                       //backgroundColor: Colors.black,
                       child: ClipRRect(
-                        child: Image.asset('assets/images/pro.jpg'),
+                        child: Image.asset(
+                          // state.user.photo ,
+                         'assets/images/pro.jpg'
+                          ),
                         borderRadius: BorderRadius.circular(50),
                       ),
                     ),
@@ -90,6 +93,8 @@ class Body extends StatelessWidget {
               ),
               // SizedBox(height: 20),
 
+              state.user.role == 'donor' ?
+
               Center(
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.6,
@@ -126,7 +131,7 @@ class Body extends StatelessWidget {
                         ],
                       )),
                 ),
-              ),
+              ): Container(),
 
               SizedBox(height: 70),
 

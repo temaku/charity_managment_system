@@ -18,12 +18,24 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   Stream<UserState> mapEventToState(UserEvent event) async*{
 
     if(event is SignUpButtonPressed){
+      yield UserSignUpLoading();
       try {
         final response = await userRepository.createUser(event.user);
         yield UserSignUpSucess();
         
       } catch (e) {
         yield UserSignUpFailed();
+      }
+    }
+
+    if(event is FetchUserHistory){
+      yield UserHistoryLoading();
+      try {
+        final historys = await userRepository.getUserHistory(event.id);
+        yield UserHistorySuccess(historys);
+        
+      } catch (e) {
+        yield UserHistoryFailed();
       }
     }
 

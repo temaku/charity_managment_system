@@ -1,5 +1,6 @@
 import 'package:charity_management/Data/DataProvider/authentication_dataprovider.dart';
 import 'package:charity_management/Data/DataProvider/user_dataprovider.dart';
+import 'package:charity_management/Data/Models/history_model.dart';
 import 'package:charity_management/Data/Models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -21,6 +22,14 @@ class UserRepository{
 
     Future<void> createUser(UserModel user) async {
     return await dataProvider.createUser(user);
+  }
+
+  Future<List<HistoryModel>> getUserHistory(String id) async{
+    //dynamic  user;
+    return await dataProvider.getUserHistory(id);
+    
+    
+
   }
 
   

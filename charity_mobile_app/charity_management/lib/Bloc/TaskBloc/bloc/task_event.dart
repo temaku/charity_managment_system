@@ -11,12 +11,8 @@ class FetchTask extends TaskEvent{}
 
 class RefreshTask extends TaskEvent{}
 
-class AcceptTask extends TaskEvent{
-  String id;
-  AcceptTask(this.id);
+class ReportTask extends TaskEvent{
+  ReportModel report;
+  ReportTask(this.report);
 }
 
-class RejectTask extends TaskEvent{
-  String id;
-  RejectTask(this.id);
-}
