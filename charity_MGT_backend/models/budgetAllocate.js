@@ -5,6 +5,11 @@ const budgetAllocateSchema = mongoose.Schema({
         type:String,
         required:[true,'Please provide the reason of budget'],
     },
+    charity:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Charity',
+        required:true
+    },
     description:{
         type:String,
         required:[true,"The description on the budget allocated"]

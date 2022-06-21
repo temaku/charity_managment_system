@@ -16,6 +16,7 @@ exports.createDonateFund = catchAysnc(async (req,res,next)=>{
 
     })
 })
+exports.createStripePayment = catchAysnc()
 exports.getAllDonateFund = catchAysnc( async (req,res,next)=>{
     const donateFund = await DonateFund.find();
     if(!donateFund){
@@ -52,8 +53,8 @@ exports.deleteDonateFund = catchAysnc( async (req,res,next)=>{
     if(!donateFund){
         return next(new AppError('There is no donateFund with id',404))
     }
-    res.status(204).json({
+    res.status(200).json({
         status:'success',
-        data:null
+        message:"donation fundraise with the Id is deleted successfully"
     })
 })

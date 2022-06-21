@@ -20,6 +20,11 @@ const reportSchema = mongoose.Schema({
         ref:'User',
         required:[true,'Provide the voluteers id']
     },
+    taskId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Task",
+        required:[true,'Provide the task id']
+    },
     reportedAt:{
         type:Date,
         default:Date.now()

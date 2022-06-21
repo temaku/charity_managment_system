@@ -14,26 +14,12 @@ const donationSchema = new mongoose.Schema({
         ref:'User',
         required:true
     },
-    DonationOption:{
-        type:String,
-        enum:['telebirr','hellocash','CBEbirr'],
-        default:'telebirr'
+    currency:{
+        type:String
 
     },
     status:{
-        type:String,
-        enum:['pending','Accepted','REjected'],
-        default:'pending'
-
-    },
-    phone:{
-        type:Number,
-        required:[true,'please provide your phone number']
-    },
-    password:{
-        type:String,
-        select: false,
-        required:[true,'Please provide password of your account']
+        type:String
     },
     donate:{
         type:Number,
@@ -43,7 +29,8 @@ const donationSchema = new mongoose.Schema({
     donatedAt:{
         type:Date,
         default:Date.now()
-    }
+    },
+    
    },
     {
         toJSON: { virtuals: true },
@@ -141,18 +128,17 @@ donationSchema.post('save',function(){
     this.constructor.DonationOfUser(this.donor);
 })
 
-// donationSchema.pre(/^find/, function(next) {
-//         this.populate({
-//             path:'charity',
-//             select:' name description'  
-//         }) 
-//         // }).populate({
-//         //     path:'donor',
-//         //     select:'username photo'
-//         // })
+donationSchema.pre(/^find/, function(next) {
+        this.populate({
+            path:'charity',
+            select:' name description email'   
+        }).populate({
+            path:'donor',
+            select:'username phone email'
+        })
         
-//         next();
-//     })
+        next();
+    })
 donationSchema.pre('save',async function(next){
    this.password = await bcrypt.hash(this.password,12) 
    next();

@@ -9,7 +9,7 @@ const eventsSchema = mongoose.Schema({
         type:String,
         required:[true,'Please describe the events going to happen']
     },
-    photo:{
+    image:{
         type:String,
         default:"default.png"
     },

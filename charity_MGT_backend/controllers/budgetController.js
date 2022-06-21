@@ -58,9 +58,9 @@ exports.deleteBudget = catchAsync( async(req,res,next)=>{
     if(!budget){
         return next(new AppError('No budget with that id.',404))
     }
-    res.status(204).json({
-        status:"success",
-        data:null
+    res.status(200).json({
+        status:'success',
+        message:"Budget with the Id is deleted successfully"
     })
 })
 

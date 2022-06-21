@@ -10,7 +10,7 @@ router.route('/').
 post(authMiddleware.protect,authMiddleware.restrictTo("volunteers"),reportController.createReport).
 get(reportController.getAllReport)
 
-router.route('/id').
+router.route('/:id').
 get(reportController.getReport).
 patch(reportController.updateReport).
 delete(reportController.deleteReport)

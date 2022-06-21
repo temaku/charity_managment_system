@@ -10,7 +10,7 @@ router.route('/').post(adminController.protect,adminController.restrictTo("admin
 get(charityController.getAllCharity)
 router.route('/:id').
 get(charityController.getCharity).
-patch(charityController.uploadcharityPhoto,charityController.resizeCharityPhoto,charityController.updateCharity).
+ patch(charityController.uploadcharityPhoto,charityController.updateCharity).
 delete(adminController.protect,adminController.restrictTo("admin"),charityController.deleteCharity)
 
 

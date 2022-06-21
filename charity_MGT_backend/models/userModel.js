@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, "Please provide a valid email"],
   },
-  photo: {
+  image: {
     type: String,
     default: "default.jpg",
   },
@@ -50,6 +50,12 @@ const userSchema = new mongoose.Schema({
     minlength: 8,
     select: false,
   },
+  status:{
+    type:String,
+    Enum:['pending','Active'],
+    default:'pending'
+
+},
   passwordChangedAt:Date,
   passwordResetToken: String,
   passwordResetExpires: Date,
@@ -72,6 +78,12 @@ userSchema.virtual('donations', {
   foreignField: 'donor',
   localField: '_id'
 });
+userSchema.virtual('tasks',{
+  ref:'Task',
+  foreignField:'volunteer',
+  localField:'_id'
+
+})
 
 
 userSchema.pre('save', async function(next) {
@@ -109,7 +121,7 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp){
   return false;
 }
 userSchema.methods.createPasswordResetToken = function() {
-  const resetToken = crypto.randomBytes(32).toString('hex');
+  const resetToken = crypto.randomBytes(8).toString('hex');
 
   this.passwordResetToken = crypto
     .createHash('sha256')

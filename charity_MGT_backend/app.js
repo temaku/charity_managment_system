@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet  = require('helmet')
@@ -18,6 +19,9 @@ const reportRoute = require('./Routes/reportRoute');
 const registerEvent = require('./Routes/eventRegisterRoute');
 const adminRoute = require('./Routes/adminRoute');
 const budgetRoute = require('./Routes/budgetRoute');
+const generateRoute =require('./Routes/generateReport');
+
+
 
 const errorHandler = require('./middleware/errhandler');
 app.use(morgan('dev'));
@@ -32,12 +36,13 @@ app.use(rateLimiter({
 
 app.use(cors());
 
+
 app.options('*', cors());
 app.use(express.static(__dirname+"/public/uploads"))
 
-app.get('/api', (req, res) => {
-    res.status(200).send('welcome to charity management system!')
-})
+
+// This example sets up an endpoint using the Express framework.
+// Watch this video to get started: https://youtu.be/rPR2aJ6XnAc.
 
 // auth route
 app.use('/api/v1/auth',authRoutes);
@@ -57,6 +62,7 @@ app.use('/api/v1/reports',reportRoute);
 app.use('/api/v1/events',eventsRoute);
 app.use('/api/v1/register',registerEvent);
 app.use('/api/v1/budget',budgetRoute);
+app.use('/api/v1/generateReport',generateRoute);
 
 
 app.use('/api/v1/users',userRoute);

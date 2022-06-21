@@ -1,35 +1,13 @@
 const Event = require('../models/eventsModel');
 const catchAsync = require('../middleware/catchAysnc');
 const AppError = require('../middleware/catchAysnc')
-const sharp = require('sharp');
-const multer = require('multer');
+const  cloudinaryUploader  = require('../middleware/cloudnary')
+const uploads = require('../middleware/multer')
 
 
-const multerStorage = multer.memoryStorage();
-const multerFilter = (req,file,cb)=>{
-    if(file.mimetype.startsWith('image')){
-        cb(null,true)
-    }else{
-        cb(new AppError('Not an image! Please upload only images.',400),false)
-    }
-}
-const upload = multer({
-  storage:multerStorage,
-  fileFilter:multerFilter
-})
-exports.uploadEventPhoto = upload.single('photo');
-exports.resizeEventPhoto = catchAsync(async (req,res,next)=>{
-  if(!req.file) return next();
-  req.file.filename = `events-${Date.now()}.jpeg`;
 
-  await sharp(req.file.buffer)
-  .resize(500,500)
-  .toFormat('jpeg')
-  .jpeg({ quality:90 })
-  .toFile(`./public/uploads/events/${req.file.filename}`);
+exports.uploadEventPhoto = uploads.single('image');
 
-  next();
-})
 const filterObj = (obj,...allowedFields)=>{
     const newObj = {};
     Object.keys(obj).forEach(el=>{
@@ -68,12 +46,19 @@ exports.getEvent = catchAsync(async (req,res,next)=>{
     })
 })
 exports.updateEvent = catchAsync(async (req,res,next)=>{
-    const filteredBody = filterObj(req.body,'title')
-    console.log("update");
-   if(req.file){
-     filteredBody.photo = req.file.filename;
-   }
-   console.log(filteredBody.image);
+    const filteredBody = filterObj(req.body,'title','description','date','organizer')
+    if(req.file){
+        const {path,filename} = req.file;
+        upload = await cloudinaryUploader(
+          path,
+          "auto",
+          "userPhoto",
+          filename,
+        );
+        }
+       // console.log(upload);
+    
+       filteredBody.image = upload.secure_url;
     const event = await Event.findByIdAndUpdate(req.params.id,filteredBody,{
         new:true,
         runValidators:true
@@ -91,8 +76,8 @@ exports.deleteEvent = catchAsync(async (req,res,next)=>{
     if(!event){
         return next(new AppError('There is no event with id',404))
     }
-    res.status(204).json({
+    res.status(200).json({
         status:'success',
-        data:null
+        message:"events with the Id is deleted successfully"
     })
 })

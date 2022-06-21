@@ -10,14 +10,13 @@ router.get('/me',authMiddleware.protect,userController.getMe,userController.getU
 router.patch('/updateMe',
 authMiddleware.protect,
 userController.uploadUserPhoto,
-userController.resizeUserPhoto,
 userController.updateMe);
 router.delete('/deleteMe',userController.deleteMe);
 
 
 router.get('/',userController.getAllUser);
 router.route('/:id').
-get(adminController.protect,adminController.restrictTo("admin"),userController.getUser).
+get(userController.getUser).
 patch(adminController.protect,adminController.restrictTo("admin"),userController.updateUser).
 delete(adminController.protect,adminController.restrictTo("admin"),userController.deleteUser)
 

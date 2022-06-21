@@ -1,6 +1,22 @@
 const Fundraise = require('../models/FundraiseModel');
 const catchAsync = require('../middleware/catchAysnc');
 const AppError = require('../middleware/appError');
+const  cloudinaryUploader  = require('../middleware/cloudnary')
+const uploads = require('../middleware/multer')
+
+
+
+
+
+exports.uploadFundraisePhoto = uploads.single('image');
+
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach(el => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
+  });
+  return newObj;
+};
 
 
 exports.createFundraise = catchAsync( async (req,res,next)=>{
@@ -32,7 +48,22 @@ exports.getFundraise = catchAsync( async (req,res,next)=>{
     })
 })
 exports.updateFundraise = catchAsync( async (req,res,next)=>{
-    const fundraise = await Fundraise.findByIdAndUpdate(req.params.id,req.body,{
+    const filteredBody = filterObj(req.body,'title','description','amount')
+    if(req.file){
+        const {path,filename} = req.file;
+        upload = await cloudinaryUploader(
+          path,
+          "auto",
+          "userPhoto",
+          filename,
+        );
+        }
+       // console.log(upload);
+    
+       filteredBody.image = upload.secure_url;
+     
+  
+    const fundraise = await Fundraise.findByIdAndUpdate(req.params.id,filteredBody,{
         new:true,
         runValidators:true
     })
@@ -49,9 +80,9 @@ exports.deleteFundraise = catchAsync(async (req,res,next)=>{
     if(!fundraise){
         return next(new AppError('No fundraise with the id',404))
     }
-    res.status(204).json({
+    res.status(200).json({
         status:'success',
-        data:null
+        message:"fundraise with the Id is deleted successfully"
     })
 
 })

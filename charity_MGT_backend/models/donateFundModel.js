@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
 const donateFundSchema = mongoose.Schema({
-    username:{
-        type:String,
-        required:[true,'Please provide the username to fundraise']
-    },
     fundraiseId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Fundraise',
@@ -13,6 +9,12 @@ const donateFundSchema = mongoose.Schema({
         type:String,
         Enum:['telebirr','hellocash','CbeBirr'],
         default:'telebirr'
+    },
+    status:{
+        type:String,
+        Enum:['pending','accepted','rejected'],
+        default:'pending'
+
     },
     phone:{
         type:Number,

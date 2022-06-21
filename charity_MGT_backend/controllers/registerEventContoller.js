@@ -56,9 +56,8 @@ exports.deleteRegisterdEvent = catchAsync(async (req,res,next)=>{
     if(!registered){
         return next(new AppError('There is no registered user',404))
     }
-    res.status(204).json({
+    res.status(200).json({
         status:'success',
-       
-        data:null
+        message:"register Event with the Id is deleted successfully"
     })
 })

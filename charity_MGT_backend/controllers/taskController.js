@@ -3,6 +3,7 @@ const catchAsync = require('../middleware/catchAysnc');
 const AppError = require('../middleware/appError');
 
 exports.createTask = catchAsync(async (req,res,next)=>{
+    
     const task = await Task.create(req.body);
     res.status(201).json({
         status:'success',
@@ -29,11 +30,15 @@ exports.getTask = catchAsync(async (req,res,next)=>{
         data:task
     })
 })
-exports.updateTask =  catchAsync(async (req,res,next)=>{
-    const task = await Task.findByIdAndUpdate(req.params.id,
-        req.body,{num:true,runValidators:true})
+exports.updateTask = catchAsync(async (req,res,next)=>{
+   
+    const task = await Task.findByIdAndUpdate(req.params.id,req.body,{
+        new:true,
+        runValidators:true
+    })
+  
     if(!task){
-        return next(new AppError('There is no task in collection',404))
+        return next(new AppError('There is no donation with id',404))
     }
     res.status(200).json({
         status:'success',
@@ -45,8 +50,8 @@ exports.deleteTask = catchAsync(async (req,res,next)=>{
     if(!task){
        return next(new AppError('There is no task in collection',404)) 
     }
-    res.status(204).json({
+    res.status(200).json({
         status:'success',
-        data:null
+        message:"Task with deleted successfully"
     })
 })

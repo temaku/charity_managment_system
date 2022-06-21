@@ -49,8 +49,8 @@ exports.deleteReport = catchAsync(async (req,res,next)=>{
     if(!report){
         return next(new AppError('There is no report in the collection',404))
     }
-    res.status(204).json({
+    res.status(200).json({
         status:'success',
-        data:null
+     message:"report with the Id is deleted successfully"
     })
 })

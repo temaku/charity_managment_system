@@ -30,9 +30,9 @@ const sendErrorDev = (err, req, res) => {
   if (req.originalUrl.startsWith('/api')) {
     return res.status(err.statusCode).json({
       status: err.status,
-     // error: err,
+      error: err,
       message: err.message,
-     // stack: err.stack
+      stack: err.stack
     });
   }
 
@@ -51,7 +51,9 @@ const sendErrorProd = (err, req, res) => {
     if (err.isOperational) {
       return res.status(err.statusCode).json({
         status: err.status,
-        message: err.message
+        message: err.message,
+        error: err,
+        stack: err.stack
       });
     }
     // B) Programming or other unknown error: don't leak error details
@@ -59,8 +61,10 @@ const sendErrorProd = (err, req, res) => {
     console.error('ERROR 💥', err);
     // 2) Send generic message
     return res.status(500).json({
-      status: 'error',
-      message: 'Something went very wrong!'
+      status: err.status,
+        message: err.message,
+        error: err,
+        stack: err.stack
     });
   }
 
