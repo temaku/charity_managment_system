@@ -46,8 +46,8 @@ To run those file in any machine the following procedures are required
          flutter get
     2. run the flutter
 # References of the code
-
-
+https://github.com/jonasschmedtmann/complete-node-bootcamp
+https://github.com/natnaelawel/ZemaStore/tree/main/zema_store_backend
 
  
 
