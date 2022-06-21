@@ -107,35 +107,41 @@ const AddEditUser = () => {
             <Form.Item
               label="Phone"
               name="phone"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your phone!",
+                },
+              ]}
             >
               <Input placeholder="Phone" />
             </Form.Item>
             <Form.Item
               label="Address"
               name="address"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your address!",
+                },
+              ]}
             >
               <Input placeholder="Address" />
             </Form.Item>
             
             <Form.Item 
-              name="role" 
-              label="Role" 
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your role!",
-                },
-              ]}
-             >
-              <Select
-                placeholder="Select a role"
-                allowClear
-              >
-                <Option value="donor">Donor</Option>
-                <Option value="volunteers">Volunteer</Option>
-              </Select>
-            </Form.Item>
-
+        label="Role"
+        name="role"
+        >
+           <Select
+              placeholder="Select the role of user"
+              allowClear >
+              <Option value="volunteers">Volunteers</Option>
+              <Option value="donor">Donor</Option>
+            
+            </Select>
+      
+        </Form.Item>
 
             <Form.Item >
               <Button

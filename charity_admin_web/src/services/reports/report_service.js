@@ -22,15 +22,22 @@ export const reportApi = createApi({
             query: () => '/v1/reports',
             providesTags: (result) => providesTagsHelper(result, tagType, "Report"),
         }),
-       
-        // addCharity: builder.mutation({
-        //     query: body => ({
-        //         url: '/v1/charities',
-        //         method: 'POST',
-        //         body
-        //     }),
-        //     invalidatesTags: [{ type: tagType }],
-        // }),
+        updateReport: builder.mutation({
+            query: body => ({
+                url: `/v1/reports/${body.id}`,
+                method: 'PATCH',
+                body
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
+        deleteReport: builder.mutation({
+            query: ({reportId}) => ({
+                url: `/v1/reports/${reportId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
+      
         
     })
 
@@ -38,7 +45,9 @@ export const reportApi = createApi({
 
 
 export const { 
-    useGetAllReportsQuery
+    useGetAllReportsQuery,
+    useUpdateReportMutation,
+    useDeleteReportMutation
   
 } = reportApi
 

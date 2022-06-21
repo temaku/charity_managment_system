@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "127483090642",
+    "project_id": "testfcm-de5aa",
+    "storage_bucket": "testfcm-de5aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127483090642:android:11d46815197f5167c53f0b",
+        "android_client_info": {
+          "package_name": "com.example.charity_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127483090642-m3dt41alhh0781mmlq1i5ar7tbglsb18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4T2jGcBSr6bhcZgPUUQd_mKoZDPoUhTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127483090642-m3dt41alhh0781mmlq1i5ar7tbglsb18.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

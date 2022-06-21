@@ -33,7 +33,8 @@ export const Home = (props) => {
       </Header>
 
       <Layout>
-        <Sider
+        <Sider 
+        
           width={250}
           className="site-layout-background mt-10 py-2 sidebar-container relative"
           breakpoint="lg"
@@ -128,13 +129,13 @@ export const Home = (props) => {
             </Menu.Item>
             {/* tasks and reporting ends  */}
           </Menu>
-          <div className="absolute bottom-4 left-0 w-full h-20">
+          <div  className="absolute bottom-4 left-0 w-full h-20">
             <span
               className=" flex items-center ml-4 mt-2 cursor-pointer"
               onClick={() => onLogout()}
             >
-              <AiOutlineLogout className="w-6 h-6 mr-3" />
-              <p className="text-md font-bold mt-2">Logout</p>
+              <AiOutlineLogout className="w-6 h-6 mr-3"  />
+              <p  data-cy="logout_button" className="text-md font-bold mt-2">Logout</p>
             </span>
           </div>
         </Sider>

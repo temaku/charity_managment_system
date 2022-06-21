@@ -1,0 +1,20 @@
+{
+    "viewportWidth": 1600,
+    "viewportHeight": 660,
+    "defaultCommandTimeout":20000,
+    "env": {
+      "cypress-react-selector": {
+        "root": "#root"
+      },
+      "serverUrl": "https://charity-manager-api.herokuapp.com/api",
+      "baseUrl":"http://localhost:3000"
+    },
+    "testFiles": "**/*.spec.{js,ts,jsx,tsx}",
+    "integrationFolder": "cypress/integration",
+    "component": {
+      "testFiles": "**/*.spec.{js,jsx,ts,tsx}",
+      "componentFolder": "src"
+    },
+    "experimentalStudio": true,
+    "screenshotOnRunFailure": false
+  }

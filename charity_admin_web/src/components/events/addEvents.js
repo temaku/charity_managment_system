@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, Button,Spin,Select } from "antd";
+import { Form, Input, Button,Spin,Select,DatePicker } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import { useAddEventMutation } from "../../services/events/events_service";
 
@@ -97,7 +97,7 @@ const AddEvent = () => {
             },
           ]}
         >
-          <Input  placeholder="Date" />
+          <DatePicker />
         </Form.Item>
         <Form.Item 
         label="Organizer"

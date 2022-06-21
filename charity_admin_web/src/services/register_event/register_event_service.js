@@ -22,6 +22,22 @@ export const registerEventApi = createApi({
             query: () => '/v1/register',
             providesTags: (result) => providesTagsHelper(result, tagType, "Register Event"),
         }),
+        updateRegisterEvent: builder.mutation({
+            query: body => ({
+                url: `/v1/register/${body.id}`,
+                method: 'PATCH',
+                body
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
+        deleteRegisterEvent: builder.mutation({
+            query: ({registerId}) => ({
+                url: `/v1/register/${registerId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
+
        
         // addCharity: builder.mutation({
         //     query: body => ({
@@ -38,7 +54,10 @@ export const registerEventApi = createApi({
 
 
 export const { 
-    useGetAllRegistrationQuery
+    useGetAllRegistrationQuery,
+    useUpdateRegisterEventMutation,
+    useDeleteRegisterEventMutation
+
   
 } = registerEventApi
 

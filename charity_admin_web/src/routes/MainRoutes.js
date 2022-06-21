@@ -30,6 +30,7 @@ import TaskIndexPage from "../components/tasks/tasklayout"
 import AddTask from "../components/tasks/AddTaskForm";
 import AddBudget from "../components/budgetAllocation/addBudget";
 import BudgetIndexPage from "../components/budgetAllocation/budgetlayout";
+import GenerateReport from "../components/reports/GenerateReport";
 
 
 
@@ -75,6 +76,7 @@ export const MainRoutes = () => {
         <Route path="/reports" element={<Report />} />
         <Route path="/registerEvents" element={<RegisterEvent />} />
         <Route path="/fundraising" element={<Fundraise />} />
+        <Route path="/generateReport" element={<GenerateReport />} />
       
 
         <Route path="*" element={<PageNotFound />} />

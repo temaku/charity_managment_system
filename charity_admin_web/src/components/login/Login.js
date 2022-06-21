@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useEffect } from "react";
 
 import "./login.css";
@@ -19,13 +20,14 @@ export const Login = () => {
 
   const dispatch = useDispatch();
 
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
+  const { user, isError, isSuccess, isLoading, message,error } = useSelector(
     (state) => state.auth
   );
 
   useEffect(() => {
     if (isError) {
       toast.error(message);
+     
     }
     if (isSuccess) {
       toast.success(message);
@@ -34,9 +36,8 @@ export const Login = () => {
 
     // reset everything to initial
     dispatch(reset());
-  }, [dispatch, navigate, isSuccess]);
+  }, [dispatch, navigate, isSuccess, isError]);
 
-  console.log("message: ", message);
 
   const onFinish = (values) => {
     console.log("values: ", values);
@@ -48,8 +49,19 @@ export const Login = () => {
   };
 
   return (
-    <>
+       <div className='flex flex-col'>
       <ToastContainer />
+      {
+                isError &&
+                <div data-cy="error-message" className='flex mt-3'>
+                    <p className='text-red-500 text-md font-bold mx-3'>
+                        {error?.name || error?.status}
+                    </p>
+                    <p className='text-red-500 text-md font-bold'>
+                        {error?.message || error?.data.message}
+                    </p>
+                </div>
+            }
 
       <div className="md:flex items-center login_container h-screen">
         <div className="md:w-1/2 h-full login_left hidden md:block lg:block">
@@ -70,6 +82,7 @@ export const Login = () => {
             <div className="flex flex-col w-4/5">
               <Form
                 name="basic"
+                data-cy="login_form"
                 labelCol={{
                   span: 8,
                 }}
@@ -81,6 +94,7 @@ export const Login = () => {
                 autoComplete="off"
                 layout="vertical"
                 className=""
+
               >
                 <Form.Item
                   label="Username"
@@ -92,7 +106,7 @@ export const Login = () => {
                     },
                   ]}
                 >
-                  <Input type="text" placeholder="charity123" />
+                  <Input data-cy="username" type="text" placeholder="charity123" />
                 </Form.Item>
 
                 <Form.Item
@@ -105,7 +119,7 @@ export const Login = () => {
                     },
                   ]}
                 >
-                  <Input type="password" placeholder="password" />
+                  <Input data-cy="password"  type="password" placeholder="password" />
                 </Form.Item>
 
                 <div className="flex w-full items-center py-2 justify-center">
@@ -134,11 +148,11 @@ export const Login = () => {
                     Login
                   </Button>
                 </Form.Item>
-              </Form>
+               </Form>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

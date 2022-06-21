@@ -16,3 +16,12 @@ export const token = () => {
         return
     }
 }
+
+export const authHeaderForPdf = () => {
+    const user = JSON.parse(localStorage.getItem("currentUser"))
+    if (user && user.token) {
+        return { token: user.token, 'Accept': 'application/pdf' }
+    } else {
+        return {}
+    }
+}

@@ -115,7 +115,7 @@ export const Navbar = () => {
                         </NavLink>
                     </Menu.Item>
                 </Menu>
-                <div className='absolute bottom-5 left-0 w-full h-20'>
+                <div data-cy="logout_button" className='absolute bottom-5 left-0 w-full h-20'>
                     <span className=' flex items-center ml-4 mt-2 cursor-pointer' onClick={userLogout}>
                         <AiOutlineLogout className='w-5 h-5 mr-3' />
                         <p className='text-sm  mt-2'>Logout</p>

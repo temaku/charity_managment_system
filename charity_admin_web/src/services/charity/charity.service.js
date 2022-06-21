@@ -1,5 +1,3 @@
-
-
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_BASE_URL } from '../../common'
 import { token } from '../auth-header'

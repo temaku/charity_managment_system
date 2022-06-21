@@ -31,6 +31,21 @@ export const budgetApi = createApi({
             }),
             invalidatesTags: [{ type: tagType }],
         }),
+        updateBudget: builder.mutation({
+            query: body => ({
+                url: `/v1/budget/${body.id}`,
+                method: 'PATCH',
+                body
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
+        deleteBudget: builder.mutation({
+            query: ({budgetId}) => ({
+                url: `/v1/budget/${budgetId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
         
     })
 
@@ -40,6 +55,8 @@ export const budgetApi = createApi({
 export const { 
     useGetAllBudgetsQuery, 
     useAddBudgetMutation,
+    useUpdateBudgetMutation,
+    useDeleteBudgetMutation
 } = budgetApi
 
 

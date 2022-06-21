@@ -89,22 +89,15 @@ const AddCharity = () => {
               <Input placeholder="Description" />
             </Form.Item>
             <Form.Item
-              label="Category"
-              name="category"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your category!",
-                },
-              ]}
-            >
-        
+             label="Category"
+             name="category">
+              
               <Select
-              placeholder="Select a role"
+              placeholder="Select a category  for charity"
               allowClear >
-              <Option value="62824794d6233ba729718767">Elderly care</Option>
-              <Option value="62824778d6233ba729718764">Child Care</Option>
-              <Option value="6282472fd6233ba729718761">Mental Illness Care</Option>
+              <Option value="628249bad6233ba72971876e">Mekedonia</Option>
+              <Option value="62824b7fd6233ba729718771">Love and Care</Option>
+              <Option value="62824e85d6233ba729718774">Sitota Mental Care</Option>
             </Select>
             
             </Form.Item>

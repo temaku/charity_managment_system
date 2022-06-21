@@ -33,6 +33,23 @@ export const usersApi = createApi({
             }),
             invalidatesTags: [{ type: tagType }],
         }),
+        updateUser: builder.mutation({
+            query: body => ({
+                url: `/v1/users/${body.id}`,
+                method: 'PATCH',
+                body
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
+        deleteUser: builder.mutation({
+            query: ({userId}) => ({
+                url: `/v1/users/${userId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: [{ type: tagType }],
+        }),
+
+
         
     })
 
@@ -42,6 +59,8 @@ export const usersApi = createApi({
 export const { 
     useGetAllUsersQuery, 
     useAddUserMutation,
+    useUpdateUserMutation,
+    useDeleteUserMutation
 } = usersApi
 
 
